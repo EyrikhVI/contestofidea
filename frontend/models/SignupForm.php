@@ -15,6 +15,10 @@ class SignupForm extends Model
     public $last_name;
     public $first_name;
     public $patronymic;
+    public $filename;
+    public $avatar;
+    public $image;
+//    public $termsofuse;
 
 
     /**
@@ -45,6 +49,15 @@ class SignupForm extends Model
 
             ['patronymic', 'trim'],
             ['patronymic', 'required'],
+
+//            ['termsofuse', 'safe'],
+//            ['termsofuse', 'boolean'],
+//            ['termsofuse', 'required','requiredValue' => 1, 'message' => 'Необходимо принять условия пользовательского соглашения'],
+
+            [['image'], 'safe'],
+            [['image'], 'file', 'extensions'=>'jpg, gif, png'],
+            [['image'], 'file', 'maxSize'=>'1000000'],
+            [['filename', 'avatar'], 'string', 'max' => 255],
         ];
     }
 public function attributeLabels()
@@ -55,7 +68,9 @@ public function attributeLabels()
         'password'=>'Пароль',
         'last_name'=>'Фамилия',
         'first_name'=>'Имя',
-        'patronymic'=>'Отчество'
+        'patronymic'=>'Отчество',
+        'image'=>'Фотография',
+//        'termsofuse'=>'Пользовательское соглашение'
     ];
 }
 
@@ -78,6 +93,8 @@ public function attributeLabels()
         $user->last_name=$this->last_name;
         $user->first_name=$this->first_name;
         $user->patronymic=$this->patronymic;
+        $user->filename=$this->filename;
+        $user->avatar=$this->avatar;
         return $user->save() ? $user : null;
     }
 }

@@ -15,6 +15,8 @@ class m181029_125518_add_last_name_column_to_user_table extends Migration
         $this->addColumn('user', 'last_name', $this->string());
         $this->addColumn('user', 'first_name', $this->string());
         $this->addColumn('user', 'patronymic', $this->string());
+        $this->addColumn('user', 'filename', $this->string());
+        $this->addColumn('user', 'avatar', $this->string());
     }
 
     /**
@@ -25,5 +27,8 @@ class m181029_125518_add_last_name_column_to_user_table extends Migration
         $this->dropColumn('user', 'last_name');
         $this->dropColumn('user', 'first_name');
         $this->dropColumn('user', 'patronymic');
+        $this->DropColumn('user', 'filename');
+        $this->DropColumn('user', 'avatar');
+
     }
 }

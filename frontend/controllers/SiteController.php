@@ -12,7 +12,8 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-
+use yii\web\UploadedFile;
+use yii\base\Security;
 
 /**
  * Site controller
@@ -153,11 +154,35 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
+            $image = UploadedFile::getInstance($model, 'image');
+            if (!is_null($image)) {
+                // Если пользователь загрузил фото
+                // сохраним его на диске и имя файла в БД
+                $model->filename = $image->name;
+                $ext = end(explode(".",$image->name));
+                // generate a unique file name to prevent duplicate filenames
+                $model->avatar = Yii::$app->security->generateRandomString() . ".{$ext}";
+                // the path to save file, you can set an uploadPath
+                // in Yii::$app->params (as used in example below)
+                $path = Yii::$app->params['uploadPath'] . $model->avatar;
+                $image->saveAs($path);
             }
+            else {
+                // если фото не выбрано, в БД сохраним имя файла пустого фото
+                $model->avatar='no_photo_avaiable.jpg';
+                $model->filename ='no_photo_avaiable.jpg';
+            }
+
+                if ($user = $model->signup()) {
+
+                    if (Yii::$app->getUser()->login($user)) {
+
+
+
+                        return $this->goHome();
+                    }
+                }
+
         }
 
         return $this->render('signup', [

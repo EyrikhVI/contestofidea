@@ -52,6 +52,10 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
+// Добавим аватар пользователя
+    $menuItems[] = '<li>'
+    .Html::img('/uploads/avatar/'.Yii::$app->user->identity->avatar, ['alt' => 'Фото','class'=>"img-circle",'width'=>'50px','height'=>'50px'])
+    . '</li>';
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
