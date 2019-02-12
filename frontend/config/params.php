@@ -1,5 +1,6 @@
 <?php
 return [
     'adminEmail' => 'admin@example.com',
-    'uploadPath' => dirname(__DIR__) . '/web/uploads/avatar/'
+    'UploadAvatar' => 'uploads/avatar/', // путь хранения файлов изображений аватаров
+    'NoImageAvatar'=>'no_photo_avaiable.jpg' //Имя файла изображения пустого аватара
 ];
