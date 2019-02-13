@@ -8,8 +8,9 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use kartik\file\FileInput;
-
-$this->title = 'Регистрация';
+//echo '<pre>'.print_r($usermodel,true).'</pre>';
+//$this->title = 'Регистрация';
+$this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
@@ -24,15 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#general" role="tab" data-toggle="tab">Пользователь</a></li>
                 <li><a href="#photo" role="tab" data-toggle="tab">Фотография</a></li>
+                <li><a href="#organization" role="tab" data-toggle="tab">Организация</a></li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active vertical-pad" id="general">
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'email') ?>
+                <?= Yii::$app->user->isGuest?$form->field($model, 'username')->textInput(['autofocus' => true]):''?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= Yii::$app->user->isGuest?$form->field($model, 'email'):''?>
+
+                <?= Yii::$app->user->isGuest?$form->field($model, 'password')->passwordInput():''?>
 
                 <?= $form->field($model, 'last_name') ?>
 
@@ -46,23 +49,51 @@ $this->params['breadcrumbs'][] = $this->title;
                 'options' => ['accept' => 'image/*'],
                 'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png'],
                     'initialPreview'=>[
-                        "/uploads/avatar/no_photo_avaiable.jpg",
+                    Yii::$app->user->isGuest?Yii::$app->params['UploadAvatar'].Yii::$app->params['NoImageAvatar']:Yii::$app->params['UploadAvatar'].$model->avatar,
                     ],
                     'initialPreviewConfig' => [
-                        ['caption' => 'no_photo_avaiable.jpg', 'size' => '0'],
+                        ['caption' => Yii::$app->user->isGuest?Yii::$app->params['NoImageAvatar']:$model->filename],
                     ],
                     'overwriteInitial'=>true,
                     'initialPreviewAsData'=>true,
                 ]
                  ]);   ?>
+<!--                --><?//= $form->field($model, 'image')->widget(FileInput::classname(), Array(
+//                    'options' => Array('accept' => 'image/*'),
+//                    'pluginOptions'=>Array('allowedFileExtensions'=>Array('jpg','gif','png'),
+//                        'initialPreview'=>Array(
+//                            Yii::$app->user->isGuest?Yii::$app->params['UploadAvatar'].Yii::$app->params['NoImageAvatar']:Yii::$app->params['UploadAvatar'].$model->avatar,
+//                        ),
+//                        'initialPreviewConfig' => Array(
+//                            Array('caption' => Yii::$app->user->isGuest?Yii::$app->params['NoImageAvatar']:$model->filename, 'size' => '0'),
+//                        ),
+//                        'overwriteInitial'=>true,
+//                        'initialPreviewAsData'=>true,
+//                    )
+//                ));   ?>
 
                 </div> <!-- end of upload photo tab -->
+                <div class="tab-pane vertical-pad" id="organization">
+                    <?= $form->field($model, 'organization_name') ?>
+
+                    <?= $form->field($model, 'organization_email') ?>
+
+                    <?= $form->field($model, 'organization_phone') ?>
+
+                    <?= $form->field($model, 'organization_address') ?>
+
+                    <?= $form->field($model, 'organization_web') ?>
+
+                    <?= $form->field($model, 'organization_position_held') ?>
+
+                </div>
             </div>
 
 
             <div class="form-group">
-            <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-            <p class="form-control-static">Нажимая кнопку «Зарегистрироваться», вы принимаете условия Пользовательского соглашения</p>
+            <?= Html::submitButton(Yii::$app->user->isGuest ?'<i class="fas fa-user-plus"></i>'.' Зарегистрироваться': '<i class="fas fa-user-edit"></i>'.' Обновить', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?= Yii::$app->user->isGuest?'<p class="form-control-static">Нажимая кнопку «Зарегистрироваться», вы принимаете условия Пользовательского соглашения и
+            даете согласие на обработку персональных данных</p>':''?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>
