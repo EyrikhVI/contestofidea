@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\User;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -12,6 +13,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use yii\base\Security;
 
@@ -147,48 +149,78 @@ class SiteController extends Controller
 
     /**
      * Signs user up.
-     *
+     *Регистрация пользователя
      * @return mixed
      */
     public function actionSignup()
     {
         $model = new SignupForm();
+        $model->scenario='register';
         if ($model->load(Yii::$app->request->post())) {
+            //получаем данные изображения аватара
             $image = UploadedFile::getInstance($model, 'image');
-            if (!is_null($image)) {
-                // Если пользователь загрузил фото
-                // сохраним его на диске и имя файла в БД
-                $model->filename = $image->name;
-                $ext = end(explode(".",$image->name));
-                // generate a unique file name to prevent duplicate filenames
-                $model->avatar = Yii::$app->security->generateRandomString() . ".{$ext}";
-                // the path to save file, you can set an uploadPath
-                // in Yii::$app->params (as used in example below)
-                $path = Yii::$app->params['uploadPath'] . $model->avatar;
-                $image->saveAs($path);
-            }
-            else {
-                // если фото не выбрано, в БД сохраним имя файла пустого фото
-                $model->avatar='no_photo_avaiable.jpg';
-                $model->filename ='no_photo_avaiable.jpg';
-            }
-
+            //сохраняем имя файла в БД и файл изображения загружаем
+            $model->SaveImage($model,$image);
+            //Регистрируем пользователя
                 if ($user = $model->signup()) {
-
                     if (Yii::$app->getUser()->login($user)) {
-
-
-
                         return $this->goHome();
                     }
                 }
-
         }
-
         return $this->render('signup', [
-            'model' => $model,
+            'model' => $model,  'title'=>'Регистрация'
         ]);
     }
+
+    //Профиль пользователя
+    //Базируется на одном view с регистрацией пользователя
+    //Данные в модели разделены сценариями
+    public function actionProfile()
+    {
+    //Найдем данные текущего зарегистрированного пользователя в БД
+    //Таблица User расширена дополнительными параметрами пользователя
+    $usermodel=User::findOne(['id'=>Yii::$app->user->identity->getId()]);
+    if (!$usermodel) {
+        throw new NotFoundHttpException('User is not found');}
+    //создадим модель для профиля по сценарию  профиля
+    $profilemodel = new SignupForm();
+    $profilemodel->scenario='profile';
+    //Присвоим начальные значения данными текущего пользователя
+    $profilemodel->attributes=$usermodel->attributes;
+    if ($profilemodel->load(Yii::$app->request->post())) {
+        if ($profilemodel->validate()) {
+        //сохраним данные в БД без валидации, т.к. данные проверялись в форме
+        $usermodel->last_name=$profilemodel->last_name;
+        $usermodel->first_name=$profilemodel->first_name;
+        $usermodel->patronymic=$profilemodel->patronymic;
+        //получаем данные изображения аватара
+        $image = UploadedFile::getInstance($profilemodel, 'image');
+        //Пользователь загрузил другое изображение ?
+        if ($image->name!=$profilemodel->filename) {
+            //Удаляем предыдущее изображение аватара. если ранее у него не было изображения аватара
+            //(показывалась картинка по умолчанию), то удалять ничего не надо
+            if ($profilemodel->filename!=Yii::$app->params['NoImageAvatar']) {$profilemodel->deleteImage(Yii::$app->params['UploadAvatar'],$profilemodel->avatar);}
+            //сохраняем новое имя файла изображения аватара в БД и загружаем файл изображения
+            $profilemodel->SaveImage($usermodel,$image);
+        }
+        $usermodel->organization_name=$profilemodel->organization_name;
+        $usermodel->organization_email=$profilemodel->organization_email;
+        $usermodel->organization_phone=$profilemodel->organization_phone;
+        $usermodel->organization_address=$profilemodel->organization_address;
+        $usermodel->organization_web=$profilemodel->organization_web;
+        $usermodel->organization_position_held=$profilemodel->organization_position_held;
+        $usermodel->save(false);
+        return $this->goHome();
+//            $usermodel->setAttributes([
+//                'username' => $profilemodel->username,
+//                'last_name' => $profilemodel->last_name
+//            ]);
+        }
+    }
+    return $this->render('signup', ['model'=>$profilemodel, 'title'=>'Профиль']);
+    }
+
 
     /**
      * Requests password reset.

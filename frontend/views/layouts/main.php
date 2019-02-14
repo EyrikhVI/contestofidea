@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -16,23 +17,45 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+    <style>
+        /* Note: Try to remove the following lines to see the effect of CSS positioning */
+        .affix {
+            top: 0;
+            width: 100%;
+            z-index: 9999 !important;
+        }
+
+        .affix + .container-fluid {
+            padding-top: 70px;
+        }
+    </style>
+
 </head>
 <body>
+<!--<div class="container-fluid" style="background-color:#F44336;color:#fff;height:100px;">
+    <h1><?/*= Html::encode(Yii::$app->name) */?></h1>
+    <h3>Проведение конкурсов</h3>
+    <p>Scroll this page to see how the navbar behaves with data-spy="affix".</p>
+    <p>The navbar is attached to the top of the page after you have scrolled a specified amount of pixels.</p>
+</div>-->
 <?php $this->beginBody() ?>
 
 <div class="wrap">
     <?php
+
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-inverse /*navbar-fixed-top*/',
         ],
     ]);
     $menuItems = [
@@ -46,16 +69,25 @@ AppAsset::register($this);
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Выход (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
+            . Html::submitButton('Выход (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout'])
             . Html::endForm()
             . '</li>';
+        $menuItems[] = '<li class="dropdown">'
+        .'<a class="dropdown-toggle" data-toggle="dropdown" style="display:block; padding:0px" href="#">'
+        . Html::img(Yii::$app->params['UploadAvatar'].Yii::$app->user->identity->avatar, ['alt' => 'Фото','class'=>"img-circle",'width'=>'50px','height'=>'50px'])
+        .'<span class="caret"></span></a>'
+        .'<ul class="dropdown-menu">'
+        .'<li>'.Html::a('<i class="fas fa-user"></i>'.' Мой профиль',URL::to(['/site/profile'])).'</li>'
+        .'<li>'.Html::a(' Мои конкурсы',URL::to(['/site/profile'])).'</li>'
+        .'</ul>'
+        .'</li>';
+
 // Добавим аватар пользователя
-    $menuItems[] = '<li>'
-    .Html::img('/uploads/avatar/'.Yii::$app->user->identity->avatar, ['alt' => 'Фото','class'=>"img-circle",'width'=>'50px','height'=>'50px'])
-    . '</li>';
+//     $menuItems[] = '<li>'
+//    . Html::a(Html::img('/uploads/avatar/'.Yii::$app->user->identity->avatar, ['alt' => 'Фото','class'=>"img-circle",'width'=>'50px','height'=>'50px']), 'site/profile')
+//      . Html::img('/uploads/avatar/'.Yii::$app->user->identity->avatar, ['alt' => 'Фото','class'=>"img-circle",'width'=>'50px','height'=>'50px'])
+//      . '</li>';
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
