@@ -15,6 +15,7 @@ class m190214_132046_create_competition_table extends Migration
         $this->createTable('{{%competition}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull()->comment('Владелец конкурса - id из таблицы user'),
+            'category_id' => $this->integer()->notNull()->comment('Категория конкурса - id из таблицы category'),
             'name' => $this->string()->notNull()->comment('Наименование конкурса'),
             'note' => $this->string()->notNull()->comment('Аннотация конкурса'),
             'start_date' => $this->integer()->notNull()->comment('Дата/время начала конкурса'),
