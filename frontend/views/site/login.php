@@ -19,7 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
+<!--            --><?//= $form->field($model, 'username', [
+//            'inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control transparent']
+//            ])->textInput()->input('username', ['placeholder' => "Enter Your Email"])->label(false); ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
