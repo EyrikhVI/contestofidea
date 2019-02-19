@@ -18,10 +18,9 @@ $this->title = 'My Yii Application';
 
         <div class="row">
             <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p><?= \frontend\components\MenuWidget::widget(['tpl'=>'menu']) ?> </p>
-
+                <ul class="auroramenu auroramenu-default">
+                    <?= \frontend\components\MenuWidget::widget(['tpl'=>'menu']) ?>
+                </ul>
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
             </div>
             <div class="col-lg-4">
