@@ -6,6 +6,7 @@
 
 namespace frontend\components;
 use yii\base\Widget;
+use yii;
 use frontend\models\Category;
 class MenuWidget extends Widget
 {
@@ -27,11 +28,16 @@ class MenuWidget extends Widget
     //Выполнение, запуск виджета
     public function run()
     {
+        //Получить кэш меню, если он есть
+        $menu=Yii::$app->cache->get('menu_category');
+        if ($menu) return $menu;
         //Из БД таблицы category извлекаем все записи, индексируем и заполняем массив
         $this->data=Category::find()->indexBy('id')->asArray()->all();
         $this->tree=$this->getTree();//Строим дерево для меню
         $this->menuHtml=$this->getMenuHtml($this->tree);//По дереву генерим код для вывода меню
-    return $this->menuHtml;
+        //Сохранить кэш меню
+        Yii::$app->cache->set('menu_category',$this->menuHtml,60*60);
+        return $this->menuHtml;
     }
     protected function getTree(){
         $tree=[];

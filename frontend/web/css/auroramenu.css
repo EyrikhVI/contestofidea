@@ -23,7 +23,7 @@
 }*/
 
 .auroramenu-default a {
-    color: rgba(105, 103, 99, 0.81);
+    color: #696763;
     background-color:#fff;
     display: block;
     padding: 0px; /*Отступ между элементами меню*/
@@ -36,11 +36,26 @@
 }
 
 .auroramenu-default a:hover {
-    color: rgba(14, 17, 30, 0.25);
+    color: #696763;
 }
 
 .auroramenu-default ul a {
-    color: rgba(5, 5, 12, 0.35);
+    color: #696763;
     font-size: 0.9em;
     padding-left: 20px;
+}
+
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #696763;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background:none;
+    border-radius: 10px;
 }
