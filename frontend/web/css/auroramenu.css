@@ -9,10 +9,10 @@
 }
 
 .auroramenu-default > li > a {
-    border-bottom: 1px #4261B8 solid;
+    border-bottom: 1px #ffffff solid;
 }
 
-.auroramenu-default > li > a:after {
+/*.auroramenu-default > li > a:after {
     content:"▼";
     float: right;
     font-size: 0.7em;
@@ -20,13 +20,13 @@
 
 .auroramenu-default > li > a.open:after {
     content:"▲";
-}
+}*/
 
 .auroramenu-default a {
-    color: #fff;
-    background-color: #496ACA;
+    color: rgba(105, 103, 99, 0.81);
+    background-color:#fff;
     display: block;
-    padding: 10px;
+    padding: 0px; /*Отступ между элементами меню*/
     transition: background-color 0.5s ease;
 }
 
@@ -36,11 +36,11 @@
 }
 
 .auroramenu-default a:hover {
-    background-color: #50B4EF;
+    color: rgba(14, 17, 30, 0.25);
 }
 
 .auroramenu-default ul a {
-    background-color: #4261B8;
+    color: rgba(5, 5, 12, 0.35);
     font-size: 0.9em;
     padding-left: 20px;
 }
