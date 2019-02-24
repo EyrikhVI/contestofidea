@@ -31,17 +31,21 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="tab-content">
                 <div class="tab-pane active vertical-pad" id="general">
 
-                <?= Yii::$app->user->isGuest?$form->field($model, 'username')->textInput(['autofocus' => true]):''?>
+                <?= Yii::$app->user->isGuest?$form->field($model, 'username')->textInput(['autofocus' => true]):'<br>'?>
 
                 <?= Yii::$app->user->isGuest?$form->field($model, 'email'):''?>
 
                 <?= Yii::$app->user->isGuest?$form->field($model, 'password')->passwordInput():''?>
 
-                <?= $form->field($model, 'last_name') ?>
+                <?= Yii::$app->user->isGuest?$form->field($model, 'last_name'):
+                    $form->field($model, 'last_name' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('last_name')))?>
 
-                <?= $form->field($model, 'first_name') ?>
+                <?= Yii::$app->user->isGuest?$form->field($model, 'first_name'):
+                    $form->field($model, 'first_name' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('first_name')))?>
 
-                <?= $form->field($model, 'patronymic') ?>
+                <?= Yii::$app->user->isGuest?$form->field($model, 'patronymic'):
+                    $form->field($model, 'patronymic' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('patronymic')))?>
+
 
                 </div>
                 <div class="tab-pane vertical-pad" id="photo">
@@ -49,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'options' => ['accept' => 'image/*'],
                 'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png'],
                     'initialPreview'=>[
-                    Yii::$app->user->isGuest?Yii::$app->params['UploadAvatar'].Yii::$app->params['NoImageAvatar']:Yii::$app->params['UploadAvatar'].$model->avatar,
+                    Yii::$app->user->isGuest?Url::to(Yii::$app->params['UploadAvatar'].Yii::$app->params['NoImageAvatar']):Url::to(Yii::$app->params['UploadAvatar'].$model->avatar),
                     ],
                     'initialPreviewConfig' => [
                         ['caption' => Yii::$app->user->isGuest?Yii::$app->params['NoImageAvatar']:$model->filename],
@@ -74,17 +78,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 </div> <!-- end of upload photo tab -->
                 <div class="tab-pane vertical-pad" id="organization">
-                    <?= $form->field($model, 'organization_name') ?>
+                    <?= Yii::$app->user->isGuest?$form->field($model, 'organization_name'):
+                        $form->field($model, 'organization_name' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('organization_name')))?>
 
-                    <?= $form->field($model, 'organization_email') ?>
+                    <?= Yii::$app->user->isGuest?$form->field($model, 'organization_email'):
+                        $form->field($model, 'organization_email' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('organization_email')))?>
 
-                    <?= $form->field($model, 'organization_phone') ?>
+                    <?= Yii::$app->user->isGuest?$form->field($model, 'organization_phone'):
+                        $form->field($model, 'organization_phone' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('organization_phone')))?>
 
-                    <?= $form->field($model, 'organization_address') ?>
+                    <?= Yii::$app->user->isGuest?$form->field($model, 'organization_address'):
+                        $form->field($model, 'organization_address' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('organization_address')))?>
 
-                    <?= $form->field($model, 'organization_web') ?>
+                    <?= Yii::$app->user->isGuest?$form->field($model, 'organization_web'):
+                        $form->field($model, 'organization_web' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('organization_web')))?>
 
-                    <?= $form->field($model, 'organization_position_held') ?>
+                    <?= Yii::$app->user->isGuest?$form->field($model, 'organization_position_held'):
+                        $form->field($model, 'organization_position_held' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('organization_position_held')))?>
 
                 </div>
             </div>
