@@ -55,10 +55,10 @@ class MenuWidget extends Widget
         $str='';
         foreach ($tree as $category){
             $str.=$this->catToTemplate($category);
-            if ($category['parent_id']) $this->count_competitions=Competition::find()->asArray()->where(['category_id'=>$category['id']])->count();
+            if ($category['parent_id']) $this->count_competitions=Category::findOne($category['id']);
         }
-//        debug($this->count_competitions);
-        return $str; $count_competitions;
+        debug($this->tree);
+        return $str;
     }
     protected function catTotemplate($category){
         ob_start();//Буферизируем вывод, для снижения нагрузки

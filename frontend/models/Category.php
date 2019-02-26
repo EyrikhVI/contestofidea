@@ -15,7 +15,7 @@ class Category extends ActiveRecord
     }
     public function getCompetition()
     {
-        return $this->hasMany(Competition::className,['category_id'=>'id']);
+        return $this->hasMany(Competition::className(),['category_id'=>'id']);
     }
 
 
