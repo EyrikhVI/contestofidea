@@ -35,7 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= Yii::$app->user->isGuest?$form->field($model, 'email'):''?>
 
-                <?= Yii::$app->user->isGuest?$form->field($model, 'password')->passwordInput():''?>
+                <?= Yii::$app->user->isGuest?$form->field($model, 'password')->passwordInput()->textInput(array('data-toggle' => 'tooltip', 'data-placement' =>'right',
+                    'title' => 'Используйте буквы, цифры и спецсимволы для пароля.')):''?>
 
                 <?= Yii::$app->user->isGuest?$form->field($model, 'last_name'):
                     $form->field($model, 'last_name' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('last_name')))?>

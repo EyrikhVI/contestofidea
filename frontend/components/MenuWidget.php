@@ -5,6 +5,7 @@
  */
 
 namespace frontend\components;
+use frontend\models\Competition;
 use yii\base\Widget;
 use yii;
 use frontend\models\Category;
@@ -14,6 +15,7 @@ class MenuWidget extends Widget
     public $data;//Массив категорий
     public $tree;//Массив сформированного дерева
     public $menuHtml;//Сформированный код меню
+    public $count_competitions;
     //Инициализация, присвоение значений по умолчанию
     public function init()
     {
@@ -29,8 +31,8 @@ class MenuWidget extends Widget
     public function run()
     {
         //Получить кэш меню, если он есть
-        $menu=Yii::$app->cache->get('menu_category');
-        if ($menu) return $menu;
+/*        $menu=Yii::$app->cache->get('menu_category');
+        if ($menu) return $menu;*/
         //Из БД таблицы category извлекаем все записи, индексируем и заполняем массив
         $this->data=Category::find()->indexBy('id')->asArray()->all();
         $this->tree=$this->getTree();//Строим дерево для меню
@@ -53,8 +55,10 @@ class MenuWidget extends Widget
         $str='';
         foreach ($tree as $category){
             $str.=$this->catToTemplate($category);
+            if ($category['parent_id']) $this->count_competitions=Competition::find()->asArray()->where(['category_id'=>$category['id']])->count();
         }
-        return $str;
+//        debug($this->count_competitions);
+        return $str; $count_competitions;
     }
     protected function catTotemplate($category){
         ob_start();//Буферизируем вывод, для снижения нагрузки

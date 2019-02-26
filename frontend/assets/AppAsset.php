@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
 //        'js/jquery-ui.js',
 //        'js/jquery.cookie.js',
         'js/jquery.auroramenu.js',
-//        'js/main.js',
+        'js/site.js',
     ];
 //    public $jsOptions=[
 //        'position'=>View::POS_HEAD
