@@ -15,7 +15,6 @@ class MenuWidget extends Widget
     public $data;//Массив категорий
     public $tree;//Массив сформированного дерева
     public $menuHtml;//Сформированный код меню
-    public $count_competitions;
     //Инициализация, присвоение значений по умолчанию
     public function init()
     {
@@ -31,10 +30,10 @@ class MenuWidget extends Widget
     public function run()
     {
         //Получить кэш меню, если он есть
-/*        $menu=Yii::$app->cache->get('menu_category');
-        if ($menu) return $menu;*/
-        //Из БД таблицы category извлекаем все записи, индексируем и заполняем массив
-        $this->data=Category::find()->indexBy('id')->asArray()->all();
+        $menu=Yii::$app->cache->get('menu_category');
+        if ($menu) return $menu;
+        //Из БД таблицы category и competitions извлекаем все записи, индексируем и заполняем массив
+        $this->data=Category::find()->with('competition')->indexBy('id')->asArray()->all();
         $this->tree=$this->getTree();//Строим дерево для меню
         $this->menuHtml=$this->getMenuHtml($this->tree);//По дереву генерим код для вывода меню
         //Сохранить кэш меню
@@ -55,9 +54,8 @@ class MenuWidget extends Widget
         $str='';
         foreach ($tree as $category){
             $str.=$this->catToTemplate($category);
-            if ($category['parent_id']) $this->count_competitions=Category::findOne($category['id']);
         }
-        debug($this->tree);
+
         return $str;
     }
     protected function catTotemplate($category){
