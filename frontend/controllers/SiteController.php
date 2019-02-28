@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\User;
+use frontend\models\Competition;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -76,7 +77,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $competitions=Competition::find()->all();
+        return $this->render('index',compact('competitions'));
     }
 
     /**
