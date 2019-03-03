@@ -23,9 +23,13 @@ $this->title = 'My Yii Application';
                 <?php if (!empty($competitions)): ?>
                 <h2>Популярные конкурсы</h2>
                     <?php foreach ($competitions as $competition):?>
-                    <?= $competition->name?>
-                    <?= $competition->note?>
-                    <?= $competition->start_date?>
+                    <?= $competition->name?><br>
+                    <?= $competition->note?><br>
+                    <?= $competition->start_date_competition?><br>
+                    <?= $competition->application_start_date_competition?><br>
+                    <?= $competition->application_end_date_competition?><br>
+                    <?= $competition->end_date_competition?><br>
+
 
                     <?php endforeach; ?>
                 <?php endif;?>

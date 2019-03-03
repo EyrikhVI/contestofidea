@@ -39,6 +39,7 @@ class m190214_132046_create_competition_table extends Migration
      */
     public function safeDown()
     {
+
         $this->dropTable('{{%competition}}');
     }
 }

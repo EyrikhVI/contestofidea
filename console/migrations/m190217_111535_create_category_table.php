@@ -20,6 +20,10 @@ class m190217_111535_create_category_table extends Migration
             'keyword' => $this->string()->comment('Ключевые слова'),
             'description' => $this->string()->comment('Описание'),
         ]);
+        $this->addForeignKey('competition_category_id_fk',
+            '{{%competition}}', 'category_id', '{{%category}}',
+            'id', 'CASCADE', 'CASCADE');
+
     }
 
     /**
@@ -27,6 +31,7 @@ class m190217_111535_create_category_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('competition_category_id_fk','{{%competition}}');
         $this->dropTable('category');
     }
 }

@@ -13,7 +13,7 @@ use yii\base\InvalidConfigException;
 class DateToTimeBehavior extends AttributeBehavior {
 
     public $timeAttribute;
-
+    public $format;//Формат отображения
     public function getValue($event) {
 
         if (empty($this->timeAttribute)) {
@@ -27,12 +27,12 @@ class DateToTimeBehavior extends AttributeBehavior {
                 $this->owner->{$this->attributes[$event->name]}
             );
 
-            return date('d.m.Y', $this->owner->{$this->timeAttribute});
+            return date($this->format, $this->owner->{$this->timeAttribute});
         } else if (!empty($this->owner->{$this->timeAttribute})
             && is_numeric($this->owner->{$this->timeAttribute})
         ) {
             $this->owner->{$this->attributes[$event->name]} = date(
-                'd.m.Y',
+                $this->format,
                 $this->owner->{$this->timeAttribute}
             );
 
