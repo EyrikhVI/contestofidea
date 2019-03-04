@@ -30,8 +30,8 @@ class MenuWidget extends Widget
     public function run()
     {
         //Получить кэш меню, если он есть
-        $menu=Yii::$app->cache->get('menu_category');
-        if ($menu) return $menu;
+//        $menu=Yii::$app->cache->get('menu_category');
+//        if ($menu) return $menu;
         //Из БД таблицы category и competitions извлекаем все записи, индексируем и заполняем массив
         $this->data=Category::find()->with('competition')->indexBy('id')->asArray()->all();
         $this->tree=$this->getTree();//Строим дерево для меню

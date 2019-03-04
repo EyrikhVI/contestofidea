@@ -22,16 +22,23 @@ $this->title = 'My Yii Application';
             <div class="col-lg-4">
                 <?php if (!empty($competitions)): ?>
                 <h2>Популярные конкурсы</h2>
+                    <div class='row'>
+                        <?php $idx=1?>
                     <?php foreach ($competitions as $competition):?>
-                    <?= $competition->name?><br>
+
+                        <div class='col-md-4'><?= $competition->name?><br>
                     <?= $competition->note?><br>
                     <?= $competition->start_date_competition?><br>
                     <?= $competition->application_start_date_competition?><br>
                     <?= $competition->application_end_date_competition?><br>
                     <?= $competition->end_date_competition?><br>
-
-
+                    <?= $competition->created_at_competition?><br>
+                    <?= $competition->updated_at_competition?><br>
+                        </div>
+                        <?php if ($idx%3===0):?></div><div class='row'><?php endif;?>
+                        <?php $idx++?>
                     <?php endforeach; ?>
+                    </div>
                 <?php endif;?>
 
             </div>

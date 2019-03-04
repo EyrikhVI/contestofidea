@@ -15,6 +15,8 @@ class Competition extends ActiveRecord
     public $application_start_date_competition;
     public $application_end_date_competition;
     public $end_date_competition;
+    public $created_at_competition;
+    public $updated_at_competition;
 
     public static function tableName()
     {
@@ -23,6 +25,7 @@ class Competition extends ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(),['id'=>'category_id']);
+
     }
     /**
      * @inheritdoc
@@ -44,7 +47,7 @@ class Competition extends ActiveRecord
             [
                 'class' => DateToTimeBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'start_date_competition',
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'application_start_date_competition',
                     ActiveRecord::EVENT_AFTER_FIND => 'application_start_date_competition',
                 ],
                 'timeAttribute' => 'application_start_date',
@@ -53,7 +56,7 @@ class Competition extends ActiveRecord
             [
                 'class' => DateToTimeBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'start_date_competition',
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'application_end_date_competition',
                     ActiveRecord::EVENT_AFTER_FIND => 'application_end_date_competition',
                 ],
                 'timeAttribute' => 'application_end_date',
@@ -62,12 +65,31 @@ class Competition extends ActiveRecord
             [
                 'class' => DateToTimeBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'start_date_competition',
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'end_date_competition',
                     ActiveRecord::EVENT_AFTER_FIND => 'end_date_competition',
                 ],
                 'timeAttribute' => 'end_date',
                 'format'=>'d.m.Y H:i:s',
             ],
+            [
+                'class' => DateToTimeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'created_at_competition',
+                    ActiveRecord::EVENT_AFTER_FIND => 'created_at_competition',
+                ],
+                'timeAttribute' => 'created_at',
+                'format'=>'d.m.Y H:i:s',
+            ],
+            [
+                'class' => DateToTimeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'updated_at_competition',
+                    ActiveRecord::EVENT_AFTER_FIND => 'updated_at_competition',
+                ],
+                'timeAttribute' => 'updated_at',
+                'format'=>'d.m.Y H:i:s',
+            ],
+
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
