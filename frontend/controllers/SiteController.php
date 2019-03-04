@@ -21,7 +21,7 @@ use yii\base\Security;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends AppController
 {
     /**
      * {@inheritdoc}
@@ -77,7 +77,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $competitions=Competition::find()->all();
+        $competitions=Competition::find()->limit(6)->orderBy('application_for_competition')->all();
+        $this->setMeta('Contest of idea');
         return $this->render('index',compact('competitions'));
     }
 

@@ -80,6 +80,7 @@ AppAsset::register($this);
         .'<ul class="dropdown-menu">'
         .'<li>'.Html::a('<i class="fas fa-user"></i>'.' Мой профиль',URL::to(['/site/profile'])).'</li>'
         .'<li>'.Html::a(' Мои конкурсы',URL::to(['/site/profile'])).'</li>'
+        .'<li>'.Html::a(' Создать конкурс',URL::to(['/site/profile'])).'</li>'
         .'</ul>'
         .'</li>';
 
