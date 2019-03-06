@@ -84,6 +84,7 @@ AppAsset::register($this);
         .'</ul>'
         .'</li>';
 
+
 // Добавим аватар пользователя
 //     $menuItems[] = '<li>'
 //    . Html::a(Html::img('/uploads/avatar/'.Yii::$app->user->identity->avatar, ['alt' => 'Фото','class'=>"img-circle",'width'=>'50px','height'=>'50px']), 'site/profile')
