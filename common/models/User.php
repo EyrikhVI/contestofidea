@@ -23,9 +23,15 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    //Константы состояния пользователей
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-
+    //Константы ролей пользователей
+    const ROLE_PARTICIPANT = 1;
+    const ROLE_ORGANIZER = 5;
+    const ROLE_EXPERT = 10;
+    const ROLE_MODER = 15;
+    const ROLE_ADMIN = 20;
 
     /**
      * {@inheritdoc}
@@ -53,6 +59,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['role', 'in', 'range' => [self::ROLE_PARTICIPANT, self::ROLE_ADMIN]],
+
         ];
     }
 
@@ -185,5 +193,52 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public static function roles()
+    {
+        return [
+            self::ROLE_PARTICIPANT => 'Участник',
+            self::ROLE_ORGANIZER => 'Организатор',
+            self::ROLE_EXPERT => 'Эксперт',
+            self::ROLE_MODER => 'Модератор',
+            self::ROLE_ADMIN => 'Администратор',
+        ];
+    }
+
+    /**
+     * Название роли
+     * @param int $id
+     * @return mixed|null
+     */
+    public function getRoleName($id)
+    {
+        $list = self::roles();
+        return $list[$id];
+    }
+
+    public function isAdmin()
+    {
+        return ($this->role == self::ROLE_ADMIN);
+    }
+
+    public function isModerator()
+    {
+        return ($this->role == self::ROLE_MODER);
+    }
+
+    public function isExpert()
+    {
+        return ($this->role == self::ROLE_EXPERT);
+    }
+
+    public function isOrganizer()
+    {
+        return ($this->role == self::ROLE_ORGANIZER);
+    }
+
+    public function isParticipant()
+    {
+        return ($this->role == self::ROLE_PARTICIPANT);
     }
 }
