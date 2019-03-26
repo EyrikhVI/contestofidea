@@ -6,6 +6,27 @@
 
 namespace frontend\controllers;
 
+use Yii;
+use frontend\models\Configuration;
+use frontend\models\Content;
+
+use common\components\Tools;
+use common\models\ContentLang;
+use common\models\Block;
+use common\models\Language;
+use common\models\Tag;
+use common\components\ProcmsCommon;
+use yii\base\Exception;
+use yii\data\ActiveDataProvider;
+use yii\helpers\Json;
+use yii\web\NotFoundHttpException;
+use yii\web\View;
+use common\widgets\Visiblebutton;
+use common\widgets\Langbutton;
+use common\widgets\Savebutton;
+use common\widgets\Settingsbutton;
+use common\widgets\Liveviewbutton;
+use backend\components\Controller;
 
 
 class ContentController extends AppController
@@ -134,13 +155,13 @@ class ContentController extends AppController
         $this->actionChecktrash();
         $p = $this->_getAvailablePages();
         $this->view->registerJs("var availablePages=JSON.parse('" . json_encode($p) . "');", View::POS_BEGIN, 'availablePages');
-        if (isset($post['work_lang']) && $post['work_lang'] != 0) {
+/*        if (isset($post['work_lang']) && $post['work_lang'] != 0) {
             $curL = $post['work_lang'];
         } else {
             $iso = Yii::$app->language;
             $iso = substr($iso, 0, 2);
             $curL = Language::findByIso($iso);
-        }
+        }*/
 
 
         $dataProvider = new ActiveDataProvider([
