@@ -64,7 +64,7 @@ class ContentController extends AppController
             $themeRowOptions=[];
         }
         $this->row_options=array_merge($this->row_options,$themeRowOptions);
-        Yii::$app->view->registerAssetBundle('backend\assets\MenatemaAsset');
+/*        Yii::$app->view->registerAssetBundle('backend\assets\MenatemaAsset');
 
         $l = Yii::$app->params['all_langs'];
         $lngA = array();
@@ -76,7 +76,7 @@ class ContentController extends AppController
         }
 
         Yii::$app->view->registerAssetBundle('backend\assets\ContentAsset');
-
+*/
         $baseDir = $this->_getBaseDir();
 
         $jsVars = [
