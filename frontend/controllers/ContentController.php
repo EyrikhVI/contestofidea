@@ -11,10 +11,10 @@ use frontend\models\Configuration;
 use frontend\models\Content;
 
 use common\components\Tools;
-use common\models\ContentLang;
-use common\models\Block;
-use common\models\Language;
-use common\models\Tag;
+use frontend\models\ContentLang;
+use frontend\models\Block;
+use frontend\models\Language;
+use frontend\models\Tag;
 use common\components\ProcmsCommon;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
@@ -29,7 +29,7 @@ use common\widgets\Liveviewbutton;
 use backend\components\Controller;
 
 
-class ContentController extends AppController
+class ContentController extends Controller
 {
     public $row_structure = array([12], [6, 6], [4, 8], [8, 4], [4, 4, 4], [3, 3, 3, 3]);
     public $row_options;
@@ -64,7 +64,7 @@ class ContentController extends AppController
             $themeRowOptions=[];
         }
         $this->row_options=array_merge($this->row_options,$themeRowOptions);
-/*        Yii::$app->view->registerAssetBundle('backend\assets\MenatemaAsset');
+        Yii::$app->view->registerAssetBundle('frontend\assets\MenatemaAsset');
 
         $l = Yii::$app->params['all_langs'];
         $lngA = array();
@@ -76,7 +76,7 @@ class ContentController extends AppController
         }
 
         Yii::$app->view->registerAssetBundle('backend\assets\ContentAsset');
-*/
+
         $baseDir = $this->_getBaseDir();
 
         $jsVars = [
