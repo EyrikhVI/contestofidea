@@ -1,8 +1,9 @@
+<?php
 /**
  * Eyrikh Valery, eyrikh@mail.ru
  * 25.03.2019 21:35
  */
-<?php
+
 
 use common\components\Html;
 use yii\widgets\DetailView;

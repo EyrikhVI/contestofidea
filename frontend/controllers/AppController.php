@@ -7,7 +7,7 @@
 //другие контролеры
 namespace frontend\controllers;
 
-use yii\web\Controller;
+//use yii\web\Controller;
 use yii\filters\AccessControl;
 use Yii;
 use yii\helpers\Url;

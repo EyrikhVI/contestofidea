@@ -4,7 +4,7 @@
  */
 <?php
 
-use common\widgets\Pagesbar;
+use frontend\components\Pagesbar;
 
 
 if( Yii::$app->controller->id=='content') {

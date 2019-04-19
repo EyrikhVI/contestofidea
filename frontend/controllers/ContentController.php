@@ -9,7 +9,7 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Configuration;
 use frontend\models\Content;
-
+use frontend\controllers\Controller;
 use common\components\Tools;
 use frontend\models\ContentLang;
 use frontend\models\Block;
@@ -26,14 +26,14 @@ use common\widgets\Langbutton;
 use common\widgets\Savebutton;
 use common\widgets\Settingsbutton;
 use common\widgets\Liveviewbutton;
-use backend\components\Controller;
+
 
 
 class ContentController extends Controller
 {
     public $row_structure = array([12], [6, 6], [4, 8], [8, 4], [4, 4, 4], [3, 3, 3, 3]);
     public $row_options;
-
+    public $layout = 'index';
     public function behaviors()
     {
         return [
@@ -75,7 +75,7 @@ class ContentController extends Controller
             $cont++;
         }
 
-        Yii::$app->view->registerAssetBundle('backend\assets\ContentAsset');
+        Yii::$app->view->registerAssetBundle('frontend\assets\ContentAsset');
 
         $baseDir = $this->_getBaseDir();
 
@@ -171,13 +171,12 @@ class ContentController extends Controller
         $blocks1 = Block::find()->where(['active' => 1])->andWhere(['>', 'position', 0])->orderBy(['position' => SORT_ASC])->all();
         $blocks2 = Block::find()->where(['active' => 1, 'position' => 0])->all();
         $blocks = array_merge($blocks1, $blocks2);
-
         foreach ($blocks as $k => $block) {
-            $this->view->registerJsFile(Yii::getAlias('@web') . '/../blocks/' . $block->prefix . '/backend/js/' . $block->prefix . '.js', ['depends' => 'backend\assets\ContentAsset']);
+            $this->view->registerJsFile(Yii::getAlias('@web') . '/../blocks/' . $block->prefix . '/backend/js/' . $block->prefix . '.js', ['depends' => 'frontend\assets\ContentAsset']);
             if (file_exists(Yii::getAlias('@menaBase') . '/blocks/' . $block->prefix . '/backend/css/' . $block->prefix . '.css')) {
 
                 $this->view->registerCssFile(
-                    Yii::getAlias('@web') . '/../blocks/' . $block->prefix . '/backend/css/' . $block->prefix . '.css', ['depends' => 'backend\assets\ContentAsset']);
+                    Yii::getAlias('@web') . '/../blocks/' . $block->prefix . '/backend/css/' . $block->prefix . '.css', ['depends' => 'frontend\assets\ContentAsset']);
             }
 
         }
@@ -368,7 +367,7 @@ class ContentController extends Controller
         $page_header = $this->renderPartial('page_header', ['model' => $model, 'model_lang' => $model_lang]);
         $visibleBtn = Visiblebutton::widget(['id_item' => $model->id]);
         $liveviewBtn = Liveviewbutton::widget(['id_item' => $model->id, 'userToken' => LIVEVIEW_HASH]);
-        $langBtn = Langbutton::widget();
+//        $langBtn = Langbutton::widget();
         $saveBtn = Savebutton::widget();
         $sb = new Settingsbutton(['id_item' => $model->id]);
         $pageSettings = $sb->getPageSettings();
