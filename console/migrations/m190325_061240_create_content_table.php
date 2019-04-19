@@ -23,7 +23,7 @@ class m190325_061240_create_content_table extends Migration
             'position'=>$this->integer()->notNull()->comment(''),
             'in_menu'=>$this->integer()->notNull()->comment(''),
             'date_add'=>$this->dateTime()->notNull()->comment(''),
-            'date_upd'=>$this->dateTime()->notNull()->comment(''),
+            'date_upd'=>$this->integer()->notNull()->comment(''),
             'active'=>$this->integer(1)->notNull()->comment(''),
             'in_trash'=>$this->integer()->notNull()->comment(''),
             'theme'=>$this->string(128)->notNull()->comment(''),

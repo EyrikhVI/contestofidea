@@ -45,10 +45,6 @@ return [
                 'category/<id:\d+>/page/<page:\d+>'=>'category/view',
                 'category/<id:\d+>'=>'category/view',
                 'competition/<id:\d+>'=>'competition /view',
-                'index.php?r=content/create'=>'content/create',
-/*                [
-                    'class' => 'frontend\components\ContentUrlRule'
-                ],*/
                 ],
         ],
     ],
