@@ -1,7 +1,3 @@
-/**
-* Eyrikh Valery, eyrikh@mail.ru
-* 04.03.2019 21:19
-*/
 <?php
 
 /* @var $this yii\web\View */
@@ -62,3 +58,7 @@
         </div>
     </div>
 <?php
+/**
+ * Eyrikh Valery, eyrikh@mail.ru
+ * 04.03.2019 21:19
+ */

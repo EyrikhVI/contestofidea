@@ -16,7 +16,7 @@ class m190325_061240_create_content_table extends Migration
         $this->createTable('{{%content}}', [
             'id' => $this->primaryKey(),
             'content'=> $this->getDb()->getSchema()->createColumnSchemaBuilder('mediumtext')->notNull()->
-            comment(''),
+            append('CHARACTER SET utf8 COLLATE utf8_unicode_ci'),
             'id_author'=>$this->integer()->notNull()->comment(''),
             'id_editor'=>$this->integer()->notNull()->comment(''),
             'id_parent'=>$this->integer()->notNull()->comment(''),
@@ -26,7 +26,8 @@ class m190325_061240_create_content_table extends Migration
             'date_upd'=>$this->integer()->notNull()->comment(''),
             'active'=>$this->integer(1)->notNull()->comment(''),
             'in_trash'=>$this->integer()->notNull()->comment(''),
-            'theme'=>$this->string(128)->notNull()->comment(''),
+            'theme'=>$this->string(128)->notNull()->comment('')->
+            append('CHARACTER SET utf8 COLLATE utf8_unicode_ci'),
         ],'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
     }
 
