@@ -5,6 +5,7 @@
  */
 
 namespace frontend\models;
+use common\models\User;
 use yii\db\ActiveRecord;
 use common\behaviors\DateToTimeBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -25,6 +26,11 @@ class Competition extends ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(),['id'=>'category_id']);
+
+    }
+    public function getUser()
+    {
+        return $this->hasOne(User::className(),['id'=>'user_id']);
 
     }
     /**

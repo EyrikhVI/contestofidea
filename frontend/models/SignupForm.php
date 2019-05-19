@@ -16,6 +16,7 @@ class SignupForm extends Model
     public $last_name;
     public $first_name;
     public $patronymic;
+    public $role;
     public $filename;
     public $avatar;
     public $image;
@@ -57,6 +58,8 @@ class SignupForm extends Model
             ['patronymic', 'trim'],
             ['patronymic', 'required'],
 
+            ['role', 'safe'],
+
 //            ['termsofuse', 'safe'],
 //            ['termsofuse', 'boolean'],
 //            ['termsofuse', 'required','requiredValue' => 1, 'message' => 'Необходимо принять условия пользовательского соглашения'],
@@ -82,10 +85,10 @@ class SignupForm extends Model
     public function scenarios()
     {
         return [
-            self::SCENARIO_PROFILE => ['last_name','first_name','patronymic',
+            self::SCENARIO_PROFILE => ['last_name','first_name','patronymic', 'role',
                 'image','filename','avatar','organization_name','organization_email','organization_phone',
                 'organization_address','organization_web','organization_position_held'],
-            self::SCENARIO_REGISTER => ['username', 'email', 'password','last_name','first_name','patronymic',
+            self::SCENARIO_REGISTER => ['username', 'email', 'password','last_name','first_name','patronymic','role',
                 'image','filename','avatar','organization_name','organization_email','organization_phone',
                 'organization_address','organization_web','organization_position_held' ],
         ];
@@ -99,6 +102,7 @@ class SignupForm extends Model
         'last_name'=>'Фамилия',
         'first_name'=>'Имя',
         'patronymic'=>'Отчество',
+        'role'=>'Роль',
         'image'=>'Фотография',
 //        'termsofuse'=>'Пользовательское соглашение'
         'organization_name'=>'Наименование организации',
@@ -130,6 +134,7 @@ class SignupForm extends Model
         $user->last_name=$this->last_name;
         $user->first_name=$this->first_name;
         $user->patronymic=$this->patronymic;
+        $user->role=$this->role;
         $user->filename=$this->filename;
         $user->avatar=$this->avatar;
         $user->organization_name=$this->organization_name;

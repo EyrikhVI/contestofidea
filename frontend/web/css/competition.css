@@ -1,0 +1,45 @@
+/*body{*/
+    /*background: #ececec;*/
+/*}*/
+img {
+    height: auto;
+    max-width: 100%;
+}
+.content{
+    margin-top: 50px;
+}
+.competition {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #c0c0c0;
+    height: 390px;
+    overflow: hidden;
+    padding: 25px 15px;
+    position: relative;
+    text-align: center;
+    transition: all 0.5s ease 0s;
+    margin-bottom: 20px;
+}
+.competition:hover {
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+}
+.competition-img {
+    height: 200px;
+}
+.competition-title a {
+    color: #000;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.competition-desc {
+    max-height: 80px;
+    overflow: hidden;
+}
+.competition-date {
+    bottom: 15px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    color: #000;
+    font-size: 12px;
+    font-weight: 500;
+}

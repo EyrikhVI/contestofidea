@@ -23,28 +23,28 @@ class AppController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => false,
-                        'roles' => ['?'],
-                        'denyCallback' => function($rule, $action) {
-                            return $this->redirect(Url::toRoute(['/site/login']));
-                        }
-                    ],
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            /** @var User $user */
-                            $user = Yii::$app->user->getIdentity();
-                            return $user->isAdmin() || $user->isModerator();
-                        }
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'rules' => [
+//                    [
+//                        'allow' => false,
+//                        'roles' => ['?'],
+//                        'denyCallback' => function($rule, $action) {
+//                            return $this->redirect(Url::toRoute(['/site/login']));
+//                        }
+//                    ],
+//                    [
+//                        'actions' => [],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                        'matchCallback' => function ($rule, $action) {
+//                            /** @var User $user */
+//                            $user = Yii::$app->user->getIdentity();
+//                            return $user->isAdmin() || $user->isModerator();
+//                        }
+//                    ],
+//                ],
+//            ],
         ];
     }
 }

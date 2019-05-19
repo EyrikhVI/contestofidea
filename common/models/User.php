@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use frontend\models\Competition;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -59,7 +60,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-            ['role', 'in', 'range' => [self::ROLE_PARTICIPANT, self::ROLE_ADMIN]],
+       /*     ['role', 'in', 'range' => [self::ROLE_PARTICIPANT, self::ROLE_ADMIN]],*/
 
         ];
     }
@@ -240,5 +241,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function isParticipant()
     {
         return ($this->role == self::ROLE_PARTICIPANT);
+    }
+    public function getCompetition()
+    {
+        return $this->hasMany(Competition::className(),['user_id'=>'id']);
+
     }
 }

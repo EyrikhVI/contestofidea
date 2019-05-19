@@ -77,9 +77,9 @@ class SiteController extends AppController
      */
     public function actionIndex()
     {
-        $competitions=Competition::find()->limit(6)->orderBy('application_for_competition')->all();
+        $competitions=Competition::find()->with('user')->limit(6)->orderBy('application_for_competition')->all();
         $this->setMeta('Contest of idea');
-        return $this->render('index',compact('competitions'));
+        return $this->render('index',compact('competitions','user_competition'));
     }
 
     /**
@@ -197,6 +197,7 @@ class SiteController extends AppController
         $usermodel->last_name=$profilemodel->last_name;
         $usermodel->first_name=$profilemodel->first_name;
         $usermodel->patronymic=$profilemodel->patronymic;
+        $usermodel->role=$profilemodel->role;
         //получаем данные изображения аватара
         $image = UploadedFile::getInstance($profilemodel, 'image');
         //Пользователь загрузил другое изображение ?

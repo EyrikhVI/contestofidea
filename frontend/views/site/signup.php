@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use kartik\file\FileInput;
+use common\models\User;
 //echo '<pre>'.print_r($usermodel,true).'</pre>';
 //$this->title = 'Регистрация';
 $this->title = $title;
@@ -47,6 +48,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Yii::$app->user->isGuest?$form->field($model, 'patronymic'):
                     $form->field($model, 'patronymic' , ['enableLabel' => false])->textInput(array('placeholder' => $model->getAttributeLabel('patronymic')))?>
 
+                <?= Yii::$app->user->isGuest?$form->field($model, 'role')->dropDownList([User::ROLE_PARTICIPANT=>'Участник',
+                    User::ROLE_ORGANIZER => 'Организатор', User::ROLE_EXPERT => 'Эксперт']):
+                    $form->field($model, 'role', ['enableLabel' => false])->dropDownList([User::ROLE_PARTICIPANT=>'Участник',
+                    User::ROLE_ORGANIZER => 'Организатор', User::ROLE_EXPERT => 'Эксперт', User::ROLE_ADMIN => 'Администратор'],
+                    ['options' => [User::ROLE_ADMIN => ['disabled' => !Yii::$app->user->getIdentity()->isAdmin()]]])?>
+
+
+<!--                --><?/*= Html::activeDropDownList($model, 'role', \common\models\User::roles()); */?>
 
                 </div>
                 <div class="tab-pane vertical-pad" id="photo">
