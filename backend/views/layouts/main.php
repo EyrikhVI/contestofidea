@@ -9,6 +9,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use yii\helpers\Url;
+use common\models\User;
 
 AppAsset::register($this);
 ?>
@@ -49,6 +51,19 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
+        $menuItems[]=['label' =>'НСИ'
+            ,
+            'items' => [
+                ['label' =>'Пользователи','visible' =>Yii::$app->user->getIdentity()->isAdmin(), 'url' => URL::to(['/user-operation/index'])],
+                ['label' =>'Категории','visible' =>true, 'url' => URL::to(['/category-operation/index'])],
+                '<li class="divider"></li>',
+                '<li class="dropdown-header">Dropdown Header</li>',
+                ['label' => '<i class="fas fa-user"></i>'.' Мой профиль', 'url' => URL::to([''])],
+                ['label' => ' Мои конкурсы', 'url' => URL::to([''])],
+                ['label' => ' Создать конкурс', 'url' => URL::to(['']),'visible' =>Yii::$app->user->getIdentity()->isParticipant()],
+
+            ]];
+
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
