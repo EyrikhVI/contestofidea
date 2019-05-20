@@ -88,9 +88,9 @@ AppAsset::register($this);
         $menuItems[]=['label' =>Yii::$app->user->identity->username
         ,
             'items' => [
-            ['label' => Html::img(Yii::$app->params['UploadAvatar'].Yii::$app->user->identity->avatar, ['alt' => 'Фото','class'=>"img-circle",'width'=>'50px','height'=>'50px']).'<span>'.Yii::$app->user->identity->last_name.' '.Yii::$app->user->identity->first_name.' '.Yii::$app->user->identity->patronymic.'</span>','visible' =>true, 'url' => '#'],
+/*            ['label' => Html::img(Yii::$app->params['UploadAvatar'].Yii::$app->user->identity->avatar, ['alt' => 'Фото','class'=>"img-circle",'width'=>'50px','height'=>'50px']).'<span>'.Yii::$app->user->identity->last_name.' '.Yii::$app->user->identity->first_name.' '.Yii::$app->user->identity->patronymic.'</span>','visible' =>true, 'url' => '#'],
             '<li class="divider"></li>',
-            '<li class="dropdown-header">Dropdown Header</li>',
+            '<li class="dropdown-header">Dropdown Header</li>',*/
             ['label' => '<i class="fas fa-user"></i>'.' Мой профиль', 'url' => URL::to(['/site/profile'])],
             ['label' => ' Мои конкурсы', 'url' => URL::to(['/site/profile'])],
             ['label' => ' Создать конкурс', 'url' => URL::to(['/site/profile']),'visible' =>Yii::$app->user->getIdentity()->isParticipant()],

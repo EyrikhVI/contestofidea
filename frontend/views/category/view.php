@@ -19,33 +19,37 @@
                     </ul>
                     <p></p>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     <?php if (!empty($competitions)): ?>
-                        <h2><?= $category->name ?></h2>
+                        <h2 align="center"><?= $category->name ?></h2>
                         <div class='row'>
                         <?php $idx=1?>
                         <?php foreach ($competitions as $competition):?>
 
                             <div class='col-md-4'>
-                                <a href="<?= \yii\helpers\Url::to(['competition/view','id'=>$competition->id])?>">
-                                <?= $competition->name?></a><br>
-                                <?= $competition->note?><br>
-                                <?= $competition->start_date_competition?><br>
-                                <?= $competition->application_start_date_competition?><br>
-                                <?= $competition->application_end_date_competition?><br>
-                                <?= $competition->end_date_competition?><br>
-                                <?= $competition->created_at_competition?><br>
-                                <?= $competition->updated_at_competition?><br>
+                                <div class="competition">
+                                    <p class="competition-title">
+                                        <a href="<?= \yii\helpers\Url::to(['competition/view','id'=>$competition->id])?>"><?= $competition->name?></a></p>
+                                    <?= $competition->user->last_name.$competition->user->first_name.$competition->user->patronymic?>
+
+                                    <p class="competition-desc"><?= $competition->note?></p>
+
+                                    <p class="competition-date">Период проведения:<br><?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
+                                        Период приема заявок:<br><?= $competition->application_start_date_competition.'-'.$competition->application_end_date_competition?><br>
+                                        Создан <?= $competition->created_at_competition?><br>Изменен <?= $competition->updated_at_competition?><br>
+                                    </p>
+                                </div>
                             </div>
                             <?php if ($idx%3===0):?></div><div class='row'><?php endif;?>
                             <?php $idx++?>
                         <?php endforeach; ?>
+
                         </div>
                         <div align="center"><?php echo yii\widgets\LinkPager::widget([
                              'pagination' => $pages,
                         ]);?></div>
                         <?php else:?>
-                    <h2>Данная категория пуста...</h2>
+                    <h2 align="center">Данная категория пуста...</h2>
                     <?php endif;?>
 
                 </div>

@@ -56,11 +56,11 @@ AppAsset::register($this);
             'items' => [
                 ['label' =>'Пользователи','visible' =>Yii::$app->user->getIdentity()->isAdmin(), 'url' => URL::to(['/user-operation/index'])],
                 ['label' =>'Категории','visible' =>true, 'url' => URL::to(['/category-operation/index'])],
-                '<li class="divider"></li>',
+/*                '<li class="divider"></li>',
                 '<li class="dropdown-header">Dropdown Header</li>',
                 ['label' => '<i class="fas fa-user"></i>'.' Мой профиль', 'url' => URL::to([''])],
                 ['label' => ' Мои конкурсы', 'url' => URL::to([''])],
-                ['label' => ' Создать конкурс', 'url' => URL::to(['']),'visible' =>Yii::$app->user->getIdentity()->isParticipant()],
+                ['label' => ' Создать конкурс', 'url' => URL::to(['']),'visible' =>Yii::$app->user->getIdentity()->isParticipant()],*/
 
             ]];
 

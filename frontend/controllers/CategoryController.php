@@ -16,7 +16,7 @@ class CategoryController extends AppController
     $id=YII::$app->request->get('id');
 //    $competitions=Competition::find()->where(['category_id'=>$id])->all();
     $query=Competition::find()->where(['category_id'=>$id]);
-    $pages=new Pagination(['totalCount'=>$query->count(),'pageSize'=>3,'forcePageParam'=>false,'pageSizeParam'=>false]);
+    $pages=new Pagination(['totalCount'=>$query->count(),'pageSize'=>12,'forcePageParam'=>false,'pageSizeParam'=>false]);
     $competitions=$query->offset($pages->offset)->limit($pages->limit)->all();
     $category=Category::findOne($id);
     $this->setMeta('Contest of idea | ' . $category->name,$category->keyword,$category->description);

@@ -42,7 +42,7 @@ class MenuWidget extends Widget
         $this->menuHtml=$this->getMenuHtml($this->tree);//По дереву генерим код для вывода меню
         //Сохранить кэш меню
         if ($this->tpl == 'menu.php') {
-            Yii::$app->cache->set('menu_category', $this->menuHtml, 60 * 60);
+            Yii::$app->cache->set('menu_category', $this->menuHtml, 60 /** 60*/);
         }
         return $this->menuHtml;
     }
