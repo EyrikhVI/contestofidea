@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Eyrikh Valery, eyrikh@mail.ru
+ * 04.03.2019 21:19
+ */
 /* @var $this yii\web\View */
 
 //$this->title = 'My Yii Application';
@@ -62,7 +65,3 @@
         </div>
     </div>
 <?php
-/**
- * Eyrikh Valery, eyrikh@mail.ru
- * 04.03.2019 21:19
- */

@@ -16,6 +16,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
         'css/auroramenu.css',
         'css/competition.css',
+        'css/competitionview.css'
     ];
     public $js = [
 //        'js/jquery-ui.js',
