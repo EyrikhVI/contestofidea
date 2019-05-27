@@ -27,7 +27,7 @@ class Category extends ActiveRecord
 //        $comp->created_at=1;
 //        $comp->updated_at=1;
 //        $comp->save();
-
+//       echo strtotime('2015-12-15 12:00:00');
         return $this->hasMany(Competition::className(),['category_id'=>'id']);
     }
 

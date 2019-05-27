@@ -25,7 +25,7 @@
             </div>
             <div class="col-lg-9">
                 <?php if (!empty($competitions)): ?>
-                <h2 align="center">Популярные конкурсы</h2>
+                <h2 align="center"><?=$title?></h2>
                     <div class='row'>
                         <?php $idx=1?>
                     <?php foreach ($competitions as $competition):?>
@@ -34,7 +34,7 @@
                             <div class="competition">
                             <p class="competition-title">
                     <a href="<?= \yii\helpers\Url::to(['competition/view','id'=>$competition->id])?>"><?= $competition->name?></a></p>
-                    <?= $competition->user->last_name.$competition->user->first_name.$competition->user->patronymic?>
+                    <?= $competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
 
                     <p class="competition-desc"><?= $competition->note?></p>
 
@@ -48,6 +48,9 @@
                         <?php $idx++?>
                     <?php endforeach; ?>
                     </div>
+                <?php if (!empty($pages)): ?><div align="center"><?php echo yii\widgets\LinkPager::widget([
+                            'pagination' => $pages,
+                        ]);?></div><?php endif;?>
                 <?php endif;?>
 
             </div>

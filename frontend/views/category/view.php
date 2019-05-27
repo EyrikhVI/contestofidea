@@ -33,7 +33,7 @@
                                 <div class="competition">
                                     <p class="competition-title">
                                         <a href="<?= \yii\helpers\Url::to(['competition/view','id'=>$competition->id])?>"><?= $competition->name?></a></p>
-                                    <?= $competition->user->last_name.$competition->user->first_name.$competition->user->patronymic?>
+                                    <?= $competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
 
                                     <p class="competition-desc"><?= $competition->note?></p>
 

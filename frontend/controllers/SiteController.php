@@ -17,6 +17,7 @@ use frontend\models\ContactForm;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use yii\base\Security;
+use yii\data\Pagination;
 
 /**
  * Site controller
@@ -72,14 +73,27 @@ class SiteController extends AppController
 
     /**
      * Displays homepage.
-     *
+     * Выводим популярные конкурсы
      * @return mixed
      */
     public function actionIndex()
     {
         $competitions=Competition::find()->with('user')->limit(6)->orderBy('application_for_competition')->all();
         $this->setMeta('Contest of idea');
-        return $this->render('index',compact('competitions','user_competition'));
+        $title='Популярные конкурсы';
+        return $this->render('index',compact('competitions','user_competition','title' ));
+    }
+
+    //Конкурсы пользователя системы
+    public function actionViewByUser()
+    {
+        $id=YII::$app->user->getId();
+        $query=Competition::find()->where(['user_id'=>$id]);
+        $pages=new Pagination(['totalCount'=>$query->count(),'pageSize'=>6,'forcePageParam'=>false,'pageSizeParam'=>false]);
+        $competitions=$query->offset($pages->offset)->limit($pages->limit)->all();
+        $user=User::findOne($id);
+        $title='Мои конкурсы';
+        return $this->render('index',compact('competitions','pages','user','title'));
     }
 
     /**
@@ -200,12 +214,6 @@ class SiteController extends AppController
         $usermodel->role=$profilemodel->role;
         //получаем данные изображения аватара
         $image = UploadedFile::getInstance($profilemodel, 'image');
-        //Пользователь загрузил другое изображение ?
-        if ($image->name!=$profilemodel->filename) {
-            //Удаляем предыдущее изображение аватара. если ранее у него не было изображения аватара
-            //(показывалась картинка по умолчанию), то удалять ничего не надо
-            if ($profilemodel->filename!=Yii::$app->params['NoImageAvatar']) {$profilemodel->deleteImage(Yii::$app->params['UploadAvatar'],$profilemodel->avatar);}
-            //сохраняем новое имя файла изображения аватара в БД и загружаем файл изображения
             $profilemodel->SaveImage($usermodel,$image);
         }
         $usermodel->organization_name=$profilemodel->organization_name;
@@ -221,7 +229,7 @@ class SiteController extends AppController
 //                'last_name' => $profilemodel->last_name
 //            ]);
         }
-    }
+
     return $this->render('signup', ['model'=>$profilemodel, 'title'=>'Профиль']);
     }
 
