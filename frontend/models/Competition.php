@@ -106,4 +106,24 @@ class Competition extends ActiveRecord
 
         ];
     }
+    public function attributeLabels()
+    {
+        return [
+            'category_id'=>'Категория конкурса',
+            'name'=>'Название конкурса',
+            'note'=>'Аннотация ',
+            'conditions_file'=>'Файл положения',
+            'conditions'=>'Положение',
+            'inform_letter'=>'Информационное письмо',
+            'start_date'=>'Дата начала конкурса',
+            'application_start_date'=>'Дата начала приема заявок',
+            'application_end_date'=>'Дата окончания приема заявок',
+            'end_date'=>'Дата окончания приема заявок',
+            'application_for_participant'=>'Заявок от участника',
+            'application_for_competition'=>'Заявок на конкурс',
+            'views_for_competition'=>'Просмотров',
+            'status'=>'Статус конкурса'
+
+        ];
+    }
 }

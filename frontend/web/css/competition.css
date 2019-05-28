@@ -11,7 +11,7 @@ img {
 .competition {
     background: #fff none repeat scroll 0 0;
     border: 1px solid #c0c0c0;
-    height: 390px;
+    height: 480px;
     overflow: hidden;
     padding: 25px 15px;
     position: relative;
@@ -31,7 +31,7 @@ img {
     text-transform: uppercase;
 }
 .competition-desc {
-    max-height: 80px;
+    max-height: 120px;
     overflow: hidden;
 }
 .competition-date {

@@ -37,7 +37,7 @@
                     <?= $competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
 
                     <p class="competition-desc"><?= $competition->note?></p>
-
+                    <p class="competition-desc"><?= $competition->conditions?></p>
                     <p class="competition-date">Период проведения:<br><?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
                     Период приема заявок:<br><?= $competition->application_start_date_competition.'-'.$competition->application_end_date_competition?><br>
                     Создан <?= $competition->created_at_competition?><br>Изменен <?= $competition->updated_at_competition?><br>

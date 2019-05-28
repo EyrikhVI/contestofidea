@@ -169,7 +169,7 @@ class SignupForm extends Model
             if ($image->name!=$model->filename) {
                 //Удаляем предыдущее изображение аватара. если ранее у него не было изображения аватара
                 //(показывалась картинка по умолчанию), то удалять ничего не надо
-                if ($model->filename!=Yii::$app->params['NoImageAvatar']) {$model->deleteImage(Yii::$app->params['UploadAvatar'],$profilemodel->avatar);}
+                if ($model->filename!=Yii::$app->params['NoImageAvatar']) {$model->deleteImage(Yii::$app->params['UploadAvatar'],$model->avatar);}
                 //сохраняем новое имя файла изображения аватара в БД и загружаем файл изображения
             }
                 // Если пользователь загрузил фото

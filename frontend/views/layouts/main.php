@@ -93,7 +93,7 @@ AppAsset::register($this);
             '<li class="dropdown-header">Dropdown Header</li>',*/
             ['label' => '<i class="fas fa-user"></i>'.' Мой профиль', 'url' => URL::to(['/site/profile'])],
             ['label' => ' Мои конкурсы', 'url' => URL::to(['/site/view-by-user'])],
-            ['label' => ' Создать конкурс', 'url' => URL::to(['/site/profile']),'visible' =>Yii::$app->user->getIdentity()->isParticipant()],
+            ['label' => ' Создать конкурс', 'url' => URL::to(['/competition/create']),'visible' =>Yii::$app->user->getIdentity()->isParticipant()],
 
             ]];
 

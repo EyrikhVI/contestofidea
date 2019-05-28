@@ -31,7 +31,7 @@
 
                                     <?= $competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
 
-                                    <p class="competition-desc"><?= $competition->note?></p>
+                                    <p class="competitionview-desc"><?= $competition->note?></p>
 
                                     <p class="competitionview-date">Период проведения:<br><?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
                                         Период приема заявок:<br><?= $competition->application_start_date_competition.'-'.$competition->application_end_date_competition?><br>
@@ -39,7 +39,7 @@
                                     </p>
                                     </div>
                                     <div class='col-lg-6'>
-                                        <p>';lll'</p>
+                                        <p class="competitionview-desc"><?= $competition->conditions?></p>
                                     </div>
                                 </div>
                             </div>
