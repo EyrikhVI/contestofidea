@@ -28,15 +28,16 @@
                                 <div class="competitionview">
                                     <p class="competitionview-title"><?= $competition->name?></a></p>
                                     <div class='col-lg-6'>
-
-                                    <?= $competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
+                                    <?='Категория конкурса: '.$competition->category->name?>
+                                    <?= 'Организатор:'.$competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
 
                                     <p class="competitionview-desc"><?= $competition->note?></p>
 
                                     <p class="competitionview-date">Период проведения:<br><?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
                                         Период приема заявок:<br><?= $competition->application_start_date_competition.'-'.$competition->application_end_date_competition?><br>
-                                        Создан <?= $competition->created_at_competition?><br>Изменен <?= $competition->updated_at_competition?><br>
-                                    </p>
+                                        Создан <?= $competition->created_at_competition?><br>Изменен <?= $competition->updated_at_competition?><br></p>
+                                        <p class="competitionview-date"><a class="btn btn-primary" <?= Yii::$app->user->identity->id!=$competition->user->id?' disabled':'' ?> href="<?= \yii\helpers\Url::to(['competition/update','id'=>$competition->id])?>" role="button">Изменить</a>
+                                        </p>
                                     </div>
                                     <div class='col-lg-6'>
                                         <p class="competitionview-desc"><?= $competition->conditions?></p>

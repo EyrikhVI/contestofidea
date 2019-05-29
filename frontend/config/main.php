@@ -45,6 +45,7 @@ return [
                 'category/<id:\d+>/page/<page:\d+>'=>'category/view',
                 'category/<id:\d+>'=>'category/view',
                 'competition/view/<id:\d+>'=>'competition/view',
+                'competition/update/<id:\d+>'=>'competition/update',
                 ],
         ],
     ],

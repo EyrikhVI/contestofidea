@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Competition */
 
-$this->title = 'Update Competition: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Competitions', 'url' => ['index']];
+$this->title = 'Изменить параметры: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Конкурсы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="competition-update">
 

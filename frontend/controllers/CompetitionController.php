@@ -58,7 +58,10 @@ class CompetitionController extends AppController
     public function actionCreate()
     {
         $model = new Competition();
-
+        $model->start_date_competition=date("d.m.Y h:i");
+        $model->application_start_date_competition=date("d.m.Y h:i");
+        $model->application_end_date_competition=date("d.m.Y h:i");
+        $model->end_date_competition=date("d.m.Y h:i");
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
