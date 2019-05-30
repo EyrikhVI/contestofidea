@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use frontend\models\CompetitionSearch;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 class CompetitionController extends AppController
 {
@@ -62,8 +63,13 @@ class CompetitionController extends AppController
         $model->application_start_date_competition=date("d.m.Y h:i");
         $model->application_end_date_competition=date("d.m.Y h:i");
         $model->end_date_competition=date("d.m.Y h:i");
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()))   {
+            $model->conditions_file = UploadedFile::getInstance($model, 'conditions_file');
+            if ($model->save()) {
+                $model->upload();// file is uploaded successfully
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
         }
 
         return $this->render('create', [

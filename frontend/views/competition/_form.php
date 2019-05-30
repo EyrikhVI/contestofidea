@@ -38,7 +38,7 @@ use mihaildev\ckeditor\CKEditor;
     ]); ?>
 
 
-    <?= $form->field($model, 'conditions_file')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'conditions_file')->fileInput() ?>
 
     <?php echo $form->field($model, 'conditions')->widget(CKEditor::className(),[
         'editorOptions' => [
@@ -106,7 +106,7 @@ use mihaildev\ckeditor\CKEditor;
     <?= $form->field($model, 'link_info_letter')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('<i class="fas fa-save"></i>'.' Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
