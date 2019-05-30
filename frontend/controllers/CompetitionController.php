@@ -64,7 +64,8 @@ class CompetitionController extends AppController
         $model->application_end_date_competition=date("d.m.Y h:i");
         $model->end_date_competition=date("d.m.Y h:i");
         if ($model->load(Yii::$app->request->post()))   {
-            $model->conditions_file = UploadedFile::getInstance($model, 'conditions_file');
+            $model->conditions_file_upload = UploadedFile::getInstance($model, 'conditions_file_upload');
+            $model->conditions_file=$model->conditions_file_upload->name;
             if ($model->save()) {
                 $model->upload();// file is uploaded successfully
                 return $this->redirect(['view', 'id' => $model->id]);

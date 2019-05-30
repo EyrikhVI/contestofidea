@@ -43,7 +43,7 @@ class Competition extends ActiveRecord
     public $created_at_competition;
     public $updated_at_competition;
 
-    public $conditions_file;
+    public $conditions_file_upload;
     /**
      * {@inheritdoc}
      */
@@ -58,11 +58,11 @@ class Competition extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'category_id', 'name', 'note', 'conditions', 'inform_letter', 'link_info_letter'], 'required'],
+            [['user_id', 'category_id', 'name', 'note', 'conditions', 'conditions_file', 'inform_letter', 'link_info_letter'], 'required'],
             [['user_id', 'category_id', 'start_date', 'application_start_date', 'application_end_date', 'end_date', 'application_for_participant', 'application_for_competition', 'views_for_competition', 'status', 'created_at', 'updated_at', 'link_info_letter'], 'integer'],
-            [['name', 'note', 'inform_letter'], 'string', 'max' => 255],
+            [['name', 'note','conditions_file', 'inform_letter'], 'string', 'max' => 255],
             [['conditions'], 'string','max'=>2000],
-            [['conditions_file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf', 'maxSize' => 1024*1024],
+            [['conditions_file_upload'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf', 'maxSize' => 1024*1024],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['start_date_competition','application_start_date_competition','application_end_date_competition','end_date_competition' ], 'date', 'format' => 'php:d.m.Y h:i:s']
@@ -116,7 +116,7 @@ class Competition extends ActiveRecord
     public function upload()
     {
         if ($this->validate()) {
-            $this->conditions_file->saveAs(__DIR__ .'/../../frontend/web/uploads/' . $this->conditions_file->baseName . '.' . $this->conditions_file->extension);
+            $this->conditions_file_upload->saveAs(__DIR__ .'/../../frontend/web/uploads/' . $this->conditions_file_upload->baseName . '.' . $this->conditions_file_upload->extension);
             return true;
         } else {
             return false;

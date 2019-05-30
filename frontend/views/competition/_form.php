@@ -38,7 +38,7 @@ use mihaildev\ckeditor\CKEditor;
     ]); ?>
 
 
-    <?= $form->field($model, 'conditions_file')->fileInput() ?>
+    <?= $form->field($model, 'conditions_file_upload')->fileInput() ?>
 
     <?php echo $form->field($model, 'conditions')->widget(CKEditor::className(),[
         'editorOptions' => [
