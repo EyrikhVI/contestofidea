@@ -58,7 +58,7 @@ class Competition extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'category_id', 'name', 'note', 'conditions', 'conditions_file', 'inform_letter', 'link_info_letter'], 'required'],
+            [['user_id', 'category_id', 'name', 'note', 'conditions', 'inform_letter', 'link_info_letter'], 'required'],
             [['user_id', 'category_id', 'start_date', 'application_start_date', 'application_end_date', 'end_date', 'application_for_participant', 'application_for_competition', 'views_for_competition', 'status', 'created_at', 'updated_at', 'link_info_letter'], 'integer'],
             [['name', 'note','conditions_file', 'inform_letter'], 'string', 'max' => 255],
             [['conditions'], 'string','max'=>2000],
@@ -81,6 +81,7 @@ class Competition extends ActiveRecord
             'name' => 'Наименование конкурса',
             'note' => 'Аннотация конкурса',
             'conditions_file' => 'Файл с условиями конкурса',
+            'conditions_file_upload' => 'Файл с условиями конкурса',
             'conditions' => 'Условия конкурса',
             'inform_letter' => 'Информационное письмо',
             'start_date_competition' => 'Дата начала конкурса',

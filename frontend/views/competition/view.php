@@ -3,6 +3,8 @@
  * Eyrikh Valery, eyrikh@mail.ru
  * 23.05.2019 11:22
  */
+use yii\helpers\Url;
+use yii\helpers\Html;
 ?>
     <div class="site-index">
 
@@ -36,7 +38,8 @@
                                     <p class="competitionview-date">Период проведения:<br><?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
                                         Период приема заявок:<br><?= $competition->application_start_date_competition.'-'.$competition->application_end_date_competition?><br>
                                         Создан <?= $competition->created_at_competition?><br>Изменен <?= $competition->updated_at_competition?><br></p>
-                                        <p class="competitionview-date"><a class="btn btn-primary" <?= Yii::$app->user->identity->id!=$competition->user->id?' disabled':'' ?> href="<?= \yii\helpers\Url::to(['competition/update','id'=>$competition->id])?>" role="button">Изменить</a>
+                                        <p class="competitionview-date"><?= Html::a('<i class="fas fa-edit"></i>'.' Изменить', Url::to(['competition/update','id'=>$competition->id]),
+                                                ['class'=> Yii::$app->user->identity->id!=$competition->user->id?'btn btn-primary disabled':'btn btn-primary']) ?>
                                         </p>
                                     </div>
                                     <div class='col-lg-6'>

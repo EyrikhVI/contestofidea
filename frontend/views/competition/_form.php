@@ -36,10 +36,14 @@ use mihaildev\ckeditor\CKEditor;
             'height'=>100,
         ],
     ]); ?>
-
-
+    <div class="row">
+        <div class="col-lg-9">
+    <?= $form->field($model, 'conditions_file')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-lg-3">
     <?= $form->field($model, 'conditions_file_upload')->fileInput() ?>
-
+        </div>
+    </div>
     <?php echo $form->field($model, 'conditions')->widget(CKEditor::className(),[
         'editorOptions' => [
             'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
@@ -51,7 +55,6 @@ use mihaildev\ckeditor\CKEditor;
     <?= $form->field($model, 'inform_letter')->textInput(['maxlength' => true]) ?>
     <div class="row">
         <div class="col-lg-3">
-    <?php $model->start_date_competition=date("d.m.Y h:i")?>
     <?= $form->field($model, 'start_date_competition')->widget(DateTimePicker::classname(), [
             'value'=> date("d.m.Y h:i",(integer) $model->start_date_competition),
             'options' => ['placeholder' => 'Введите дату','style'=>'width:175px'],
@@ -62,7 +65,6 @@ use mihaildev\ckeditor\CKEditor;
         ]); ?>
         </div>
         <div class="col-lg-3">
-    <?php $model->application_start_date_competition=date("d.m.Y h:i")?>
     <?= $form->field($model, 'application_start_date_competition')->widget(DateTimePicker::classname(), [
             'value'=> date("d.m.Y h:i",(integer) $model->application_start_date_competition),
             'options' => ['placeholder' => 'Введите дату','style'=>'width:175px'],
@@ -73,7 +75,6 @@ use mihaildev\ckeditor\CKEditor;
     ]); ?>
         </div>
         <div class="col-lg-3">
-    <?php $model->application_end_date_competition=date("d.m.Y h:i")?>
     <?= $form->field($model, 'application_end_date_competition')->widget(DateTimePicker::classname(), [
             'value'=> date("d.m.Y h:i",(integer) $model->application_end_date_competition),
             'options' => ['placeholder' => 'Введите дату','style'=>'width:175px'],
@@ -84,7 +85,6 @@ use mihaildev\ckeditor\CKEditor;
     ]); ?>
         </div>
         <div class="col-lg-3">
-            <?php $model->end_date_competition=date("d.m.Y h:i")?>
     <?= $form->field($model, 'end_date_competition')->widget(DateTimePicker::classname(), [
             'value'=> date("d.m.Y h:i",(integer) $model->end_date_competition),
             'options' => ['placeholder' => 'Введите дату','style'=>'width:175px'],
