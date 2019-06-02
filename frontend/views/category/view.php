@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-lg-9">
                     <?php if (!empty($competitions)): ?>
-                        <h2 align="center"><?= $category->name ?></h2>
+                        <h2 align="center"><i class="fas fa-folder-open"></i><?= $category->name ?></h2>
                         <div class='row'>
                         <?php $idx=1?>
                         <?php foreach ($competitions as $competition):?>
@@ -35,12 +35,12 @@
                                         <a href="<?= \yii\helpers\Url::to(['competition/view','id'=>$competition->id])?>"><?= $competition->name?></a></p>
                                     <?= $competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
 
-                                    <p class="competition-desc"><?= $competition->note?></p>
-                                    <p class="competition-desc"><?= $competition->conditions?></p>
-                                    <p class="competition-date">Период проведения:<br><?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
+                                    <div class="competition-desc"><?= $competition->note?></div>
+                                    <div class="competition-desc"><?= $competition->conditions?></div>
+                                    <div class="competition-date">Период проведения:<br><?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
                                         Период приема заявок:<br><?= $competition->application_start_date_competition.'-'.$competition->application_end_date_competition?><br>
                                         Создан <?= $competition->created_at_competition?><br>Изменен <?= $competition->updated_at_competition?><br>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                             <?php if ($idx%3===0):?></div><div class='row'><?php endif;?>

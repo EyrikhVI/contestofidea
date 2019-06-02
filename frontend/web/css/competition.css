@@ -29,10 +29,12 @@ img {
     color: #214794;
     font-weight: 500;
     text-transform: uppercase;
+    font-size: 18px;
 }
-.competition-desc {
-    max-height: 120px;
+.competition-desc  {
+    max-height: 100px;
     overflow: hidden;
+    text-overflow: ellipsis; /* Добавляем многоточие */
 }
 .competition-date {
     bottom: 15px;
