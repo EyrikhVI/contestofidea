@@ -44,6 +44,7 @@ class Competition extends ActiveRecord
     public $updated_at_competition;
 
     public $conditions_file_upload;
+    public $logo_file_upload;
     /**
      * {@inheritdoc}
      */
@@ -60,9 +61,10 @@ class Competition extends ActiveRecord
         return [
             [['user_id', 'category_id', 'name', 'note', 'conditions', 'inform_letter', 'link_info_letter'], 'required'],
             [['user_id', 'category_id', 'start_date', 'application_start_date', 'application_end_date', 'end_date', 'application_for_participant', 'application_for_competition', 'views_for_competition', 'status', 'created_at', 'updated_at', 'link_info_letter'], 'integer'],
-            [['name', 'note','conditions_file', 'inform_letter'], 'string', 'max' => 255],
-            [['conditions'], 'string','max'=>2000],
+            [['name', 'logo','note','conditions_file', 'inform_letter'], 'string', 'max' => 255],
+            [['conditions','logo'], 'string','max'=>2000],
             [['conditions_file_upload'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf', 'maxSize' => 1024*1024],
+            [['logo_file_upload'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, gif', 'maxSize' => 1024*1024],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['start_date_competition','application_start_date_competition','application_end_date_competition','end_date_competition' ], 'date', 'format' => 'php:d.m.Y h:i:s']
@@ -79,6 +81,8 @@ class Competition extends ActiveRecord
             'user_id' => 'Владелец конкурса',
             'category_id' => 'Категория конкурса',
             'name' => 'Наименование конкурса',
+            'logo_file_upload' => 'Файл с логотипом конкурса',
+            'logo' => 'Логотип конкурса',
             'note' => 'Аннотация конкурса',
             'conditions_file' => 'Файл с условиями конкурса',
             'conditions_file_upload' => 'Файл с условиями конкурса',
@@ -118,6 +122,8 @@ class Competition extends ActiveRecord
     {
         if ($this->validate()) {
             $this->conditions_file_upload->saveAs(__DIR__ .'/../../frontend/web/uploads/' . $this->conditions_file_upload->baseName . '.' . $this->conditions_file_upload->extension);
+            $this->logo_file_upload->saveAs(__DIR__ .'/../../frontend/web/uploads/' . $this->logo_file_upload->baseName . '.' . $this->logo_file_upload->extension);
+
             return true;
         } else {
             return false;

@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 //$this->title = 'My Yii Application';
+use yii\helpers\Html;
 ?>
 <div class="site-index">
 
@@ -34,6 +35,7 @@
                             <div class="competition">
                             <p class="competition-title">
                     <a href="<?= \yii\helpers\Url::to(['competition/view','id'=>$competition->id])?>"><?= $competition->name?></a></p>
+                    <div class="competition-img"><?= Html::img('@web/uploads/' . $competition->logo, ['alt' => 'Фото']);?></div>
                     <?= $competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
 
                     <div class="competition-desc"><?= $competition->note?></div>

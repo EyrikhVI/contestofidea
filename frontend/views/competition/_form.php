@@ -28,6 +28,14 @@ use mihaildev\ckeditor\CKEditor;
     </div>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+        <div class="col-lg-9">
+            <?= $form->field($model, 'logo')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'logo_file_upload')->fileInput() ?>
+        </div>
+    </div>
 
     <?php echo $form->field($model, 'note')->widget(CKEditor::className(),[
         'editorOptions' => [
