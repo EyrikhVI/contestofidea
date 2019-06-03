@@ -12,7 +12,9 @@ class m190521_060503_add_competition_fields extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('{{%competition}}', 'conditions', $this->string()->after('note')
+        $this->addColumn('{{%competition}}', 'logo', $this->string()->after('name')
+            ->notNull()->comment('Логотип конкурса'));
+        $this->addColumn('{{%competition}}', 'conditions', $this->string(4000)->after('note')
             ->notNull()->comment('Условия конкурса'));
         $this->addColumn('{{%competition}}', 'inform_letter', $this->string()->after('conditions')
             ->notNull()->comment('Информационное письмо'));
@@ -37,7 +39,6 @@ class m190521_060503_add_competition_fields extends Migration
         $this->dropColumn('{{%competition}}', 'inform_letter');
         $this->dropColumn('{{%competition}}', 'link_info_letter');
         $this->dropColumn('{{%competition}}', 'conditions_file');
-        return false;
     }
 
     /*

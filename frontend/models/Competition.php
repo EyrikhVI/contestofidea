@@ -62,7 +62,7 @@ class Competition extends ActiveRecord
             [['user_id', 'category_id', 'name', 'note', 'conditions', 'inform_letter', 'link_info_letter'], 'required'],
             [['user_id', 'category_id', 'start_date', 'application_start_date', 'application_end_date', 'end_date', 'application_for_participant', 'application_for_competition', 'views_for_competition', 'status', 'created_at', 'updated_at', 'link_info_letter'], 'integer'],
             [['name', 'logo','note','conditions_file', 'inform_letter'], 'string', 'max' => 255],
-            [['conditions','logo'], 'string','max'=>2000],
+            [['conditions'], 'string','max'=>4000],
             [['conditions_file_upload'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf', 'maxSize' => 1024*1024],
             [['logo_file_upload'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, gif', 'maxSize' => 1024*1024],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],

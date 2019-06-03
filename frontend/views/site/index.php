@@ -4,6 +4,7 @@
 
 //$this->title = 'My Yii Application';
 use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
 <div class="site-index">
 
@@ -28,14 +29,16 @@ use yii\helpers\Html;
                 <?php if (!empty($competitions)): ?>
                 <h2 align="center"><?='<i class="fas fa-folder-open"></i>'.' '.$title?></h2>
                     <div class='row'>
-                        <?php $idx=1?>
+                    <?php $idx=1?>
                     <?php foreach ($competitions as $competition):?>
 
                         <div class='col-lg-4'>
                             <div class="competition">
-                            <p class="competition-title">
-                    <a href="<?= \yii\helpers\Url::to(['competition/view','id'=>$competition->id])?>"><?= $competition->name?></a></p>
-                    <div class="competition-img"><?= Html::img('@web/uploads/' . $competition->logo, ['alt' => 'Фото']);?></div>
+                            <div class="competition-title">
+                    <a href="<?= Url::to(['competition/view','id'=>$competition->id])?>"><?= $competition->name?></a></div>
+                    <?php if (!empty($competition->logo)): ?>
+                    <div class="competition-img"><?= Html::img('@web/uploads/' . $competition->logo, ['alt' => 'Логотип']);?></div>
+                    <?php endif;?>
                     <?= $competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
 
                     <div class="competition-desc"><?= $competition->note?></div>

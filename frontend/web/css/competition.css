@@ -23,7 +23,8 @@ img {
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
 }
 .competition-img {
-    height: 200px;
+    height: auto;
+    max-width: 100%;
 }
 .competition-title a {
     color: #214794;
