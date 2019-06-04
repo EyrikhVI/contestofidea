@@ -90,14 +90,15 @@ class CompetitionController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $model->setScenario('update');
+        $model->logo_file_upload=$model->logo;
         if ($model->load(Yii::$app->request->post()))   {
-            $model->conditions_file_upload = UploadedFile::getInstance($model, 'conditions_file_upload');
-            $model->logo_file_upload = UploadedFile::getInstance($model, 'logo_file_upload');
-            $model->conditions_file=$model->conditions_file_upload->name;
-            $model->logo=$model->logo_file_upload->name;
+//            $model->conditions_file_upload = UploadedFile::getInstance($model, 'conditions_file_upload');
+//            $model->logo_file_upload = UploadedFile::getInstance($model, 'logo_file_upload');
+/*            $model->conditions_file=$model->conditions_file_upload->name;
+            $model->logo=$model->logo_file_upload->name;*/
             if ($model->save()) {
-                $model->upload();// file is uploaded successfully
+//                $model->upload();// file is uploaded successfully
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 

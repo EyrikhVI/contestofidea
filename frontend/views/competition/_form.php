@@ -30,10 +30,10 @@ use mihaildev\ckeditor\CKEditor;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     <div class="row">
         <div class="col-lg-9">
-            <?= $form->field($model, 'logo')->textInput(['maxlength' => true]) ?>
+<!--            --><?/*= $form->field($model, 'logo')->textInput(['maxlength' => true]) */?>
         </div>
         <div class="col-lg-3">
-            <?= $form->field($model, 'logo_file_upload')->fileInput() ?>
+            <?= $form->field($model, 'logo')->fileInput() ?>
         </div>
     </div>
 
@@ -46,10 +46,10 @@ use mihaildev\ckeditor\CKEditor;
     ]); ?>
     <div class="row">
         <div class="col-lg-9">
-    <?= $form->field($model, 'conditions_file')->textInput(['maxlength' => true]) ?>
+<!--    --><?/*= $form->field($model, 'conditions_file')->textInput(['maxlength' => true]) */?>
         </div>
         <div class="col-lg-3">
-    <?= $form->field($model, 'conditions_file_upload')->fileInput() ?>
+    <?= $form->field($model, 'conditions_file')->fileInput() ?>
         </div>
     </div>
     <?php echo $form->field($model, 'conditions')->widget(CKEditor::className(),[

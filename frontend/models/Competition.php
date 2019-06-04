@@ -6,6 +6,7 @@ use yii\db\ActiveRecord;
 use Yii;
 use common\behaviors\DateToTimeBehavior;
 use yii\behaviors\TimestampBehavior;
+use mohorev\file\UploadBehavior;
 use yii\web\UploadedFile;
 
 /**
@@ -61,10 +62,10 @@ class Competition extends ActiveRecord
         return [
             [['user_id', 'category_id', 'name', 'note', 'conditions', 'inform_letter', 'link_info_letter'], 'required'],
             [['user_id', 'category_id', 'start_date', 'application_start_date', 'application_end_date', 'end_date', 'application_for_participant', 'application_for_competition', 'views_for_competition', 'status', 'created_at', 'updated_at', 'link_info_letter'], 'integer'],
-            [['name', 'logo','note','conditions_file', 'inform_letter'], 'string', 'max' => 255],
+            [['name', /*'logo',*/'note',/*'conditions_file',*/ 'inform_letter'], 'string', 'max' => 255],
             [['conditions'], 'string','max'=>4000],
-            [['conditions_file_upload'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf', 'maxSize' => 1024*1024],
-            [['logo_file_upload'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, gif', 'maxSize' => 1024*1024],
+            [['conditions_file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 1024*1024,'on' => ['create', 'update']],
+            [['logo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, gif', 'maxSize' => 1024*1024,'on' => ['create', 'update']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['start_date_competition','application_start_date_competition','application_end_date_competition','end_date_competition' ], 'date', 'format' => 'php:d.m.Y h:i:s']
@@ -194,7 +195,21 @@ class Competition extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
-            ]
+            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'conditions_file',
+                'scenarios' => ['create', 'update'],
+                'path' => '@webroot/uploads/{category.id}',
+                'url' => '@web/uploads/{category.id}',
+            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'logo',
+                'scenarios' => ['create', 'update'],
+                'path' => '@webroot/uploads/{id}',
+                'url' => '@web/uploads/{id}',
+            ],
 
         ];
     }
