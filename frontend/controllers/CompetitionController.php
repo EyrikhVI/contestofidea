@@ -59,22 +59,14 @@ class CompetitionController extends AppController
     public function actionCreate()
     {
         $model = new Competition();
+        $model->setScenario('create');
         $model->start_date_competition=date("d.m.Y h:i");
         $model->application_start_date_competition=date("d.m.Y h:i");
         $model->application_end_date_competition=date("d.m.Y h:i");
         $model->end_date_competition=date("d.m.Y h:i");
-        if ($model->load(Yii::$app->request->post()))   {
-            $model->conditions_file_upload = UploadedFile::getInstance($model, 'conditions_file_upload');
-            $model->logo_file_upload = UploadedFile::getInstance($model, 'logo_file_upload');
-            $model->conditions_file=$model->conditions_file_upload->name;
-            $model->logo=$model->logo_file_upload->name;
-            if ($model->save()) {
-                $model->upload();// file is uploaded successfully
+        if ($model->load(Yii::$app->request->post())&&$model->save())   {
                 return $this->redirect(['view', 'id' => $model->id]);
-            }
-
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -92,18 +84,10 @@ class CompetitionController extends AppController
         $model = $this->findModel($id);
         $model->setScenario('update');
         $model->logo_file_upload=$model->logo;
-        if ($model->load(Yii::$app->request->post()))   {
-//            $model->conditions_file_upload = UploadedFile::getInstance($model, 'conditions_file_upload');
-//            $model->logo_file_upload = UploadedFile::getInstance($model, 'logo_file_upload');
-/*            $model->conditions_file=$model->conditions_file_upload->name;
-            $model->logo=$model->logo_file_upload->name;*/
-            if ($model->save()) {
-//                $model->upload();// file is uploaded successfully
+        $model->conditions_file_upload=$model->conditions_file;
+        if ($model->load(Yii::$app->request->post())&&$model->save())   {
                 return $this->redirect(['view', 'id' => $model->id]);
-            }
-
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);

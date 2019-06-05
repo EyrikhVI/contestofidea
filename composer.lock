@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "252bb792e7bd264fe52cf69b6a554c1e",
@@ -481,20 +481,20 @@
         },
         {
             "name": "mohorev/yii2-upload-behavior",
-            "version": "0.2.1",
+            "version": "0.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mohorev/yii2-upload-behavior.git",
-                "reference": "946439ccdfe7ae897621c8721c14e7088e7b2774"
+                "reference": "a4510d38bba8317f10f3f98b13f99920f782cab8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mohorev/yii2-upload-behavior/zipball/946439ccdfe7ae897621c8721c14e7088e7b2774",
-                "reference": "946439ccdfe7ae897621c8721c14e7088e7b2774",
+                "url": "https://api.github.com/repos/mohorev/yii2-upload-behavior/zipball/a4510d38bba8317f10f3f98b13f99920f782cab8",
+                "reference": "a4510d38bba8317f10f3f98b13f99920f782cab8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0",
+                "php": ">=5.4.0",
                 "yiisoft/yii2": "~2.0.0"
             },
             "require-dev": {
@@ -533,7 +533,7 @@
                 "upload",
                 "yii2"
             ],
-            "time": "2018-08-10T07:58:22+00:00"
+            "time": "2018-05-05T22:55:33+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

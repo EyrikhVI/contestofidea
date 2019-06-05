@@ -30,15 +30,19 @@ use yii\helpers\Html;
                                 <div class="competitionview">
                                     <p class="competitionview-title"><?= $competition->name?></a></p>
 
-                                    <?='Категория конкурса: '.$competition->category->name?>
-                                    <?= 'Организатор:'.$competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
+                                    <?= '<i class="fas fa-folder-open"></i>'.'Категория конкурса: '.$competition->category->name?>
+                                    <?= '<i class="fas fa-user"></i>'.'Организатор:'.$competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
 
                                     <p class="competitionview-desc"><?= $competition->note?></p>
-
+                                    <?php if (!empty($competition->logo)): ?>
+                                        <div class="competition-img"><?= Html::img(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->logo, ['alt' => 'Логотип']);?></div>
+                                    <?php endif;?>
                                     <p class="competitionview-date">Период проведения:<br><?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
                                         Период приема заявок:<br><?= $competition->application_start_date_competition.'-'.$competition->application_end_date_competition?><br>
                                         Создан <?= $competition->created_at_competition?><br>Изменен <?= $competition->updated_at_competition?><br></p>
                                         <p class="competitionview-date"><?= Html::a('<i class="fas fa-edit"></i>'.' Изменить', Url::to(['competition/update','id'=>$competition->id]),
+                                                ['class'=> Yii::$app->user->identity->id!=$competition->user->id?'btn btn-primary disabled':'btn btn-primary']) ?>
+                                            <?= Html::a('<i class="far fa-file-pdf"></i>'.' Положение', Url::to(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->conditions_file),
                                                 ['class'=> Yii::$app->user->identity->id!=$competition->user->id?'btn btn-primary disabled':'btn btn-primary']) ?>
                                         </p>
 

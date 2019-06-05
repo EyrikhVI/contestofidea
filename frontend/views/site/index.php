@@ -37,7 +37,7 @@ use yii\helpers\Url;
                             <div class="competition-title">
                     <a href="<?= Url::to(['competition/view','id'=>$competition->id])?>"><?= $competition->name?></a></div>
                     <?php if (!empty($competition->logo)): ?>
-                    <div class="competition-img"><?= Html::img('@web/uploads/' . $competition->logo, ['alt' => 'Логотип']);?></div>
+                    <div class="competition-img"><?= Html::img(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->logo, ['alt' => 'Логотип']);?></div>
                     <?php endif;?>
                     <?= $competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
 
