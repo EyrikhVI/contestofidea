@@ -43,7 +43,7 @@ use yii\helpers\Html;
                                         <p class="competitionview-date"><?= Html::a('<i class="fas fa-edit"></i>'.' Изменить', Url::to(['competition/update','id'=>$competition->id]),
                                                 ['class'=> Yii::$app->user->identity->id!=$competition->user->id?'btn btn-primary disabled':'btn btn-primary']) ?>
                                             <?= Html::a('<i class="far fa-file-pdf"></i>'.' Положение', Url::to(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->conditions_file),
-                                                ['class'=> Yii::$app->user->identity->id!=$competition->user->id?'btn btn-primary disabled':'btn btn-primary']) ?>
+                                                ['class'=> empty($competition->conditions_file)?'btn btn-primary disabled':'btn btn-primary']) ?>
                                         </p>
 
                                         <p class="competitionview-desc"><?= $competition->conditions?></p>

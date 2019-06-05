@@ -64,7 +64,7 @@ use mihaildev\ckeditor\CKEditor;
     <div class="row">
         <div class="col-lg-3">
     <?= $form->field($model, 'start_date_competition')->widget(DateTimePicker::classname(), [
-            'value'=> date("d.m.Y h:i",(integer) $model->start_date_competition),
+//            'value'=> date("d.m.Y h:i",(integer) $model->start_date_competition),
             'options' => ['placeholder' => 'Введите дату','style'=>'width:175px'],
             'pluginOptions' => [
                 'autoclose' => true,
@@ -74,7 +74,7 @@ use mihaildev\ckeditor\CKEditor;
         </div>
         <div class="col-lg-3">
     <?= $form->field($model, 'application_start_date_competition')->widget(DateTimePicker::classname(), [
-            'value'=> date("d.m.Y h:i",(integer) $model->application_start_date_competition),
+//            'value'=> date("d.m.Y h:i",(integer) $model->application_start_date_competition),
             'options' => ['placeholder' => 'Введите дату','style'=>'width:175px'],
             'pluginOptions' => [
                 'autoclose' => true,
@@ -84,7 +84,7 @@ use mihaildev\ckeditor\CKEditor;
         </div>
         <div class="col-lg-3">
     <?= $form->field($model, 'application_end_date_competition')->widget(DateTimePicker::classname(), [
-            'value'=> date("d.m.Y h:i",(integer) $model->application_end_date_competition),
+//            'value'=> date("d.m.Y h:i",(integer) $model->application_end_date_competition),
             'options' => ['placeholder' => 'Введите дату','style'=>'width:175px'],
             'pluginOptions' => [
                 'autoclose' => true,
@@ -94,7 +94,7 @@ use mihaildev\ckeditor\CKEditor;
         </div>
         <div class="col-lg-3">
     <?= $form->field($model, 'end_date_competition')->widget(DateTimePicker::classname(), [
-            'value'=> date("d.m.Y h:i",(integer) $model->end_date_competition),
+//            'value'=> date("d.m.Y h:i",(integer) $model->end_date_competition),
             'options' => ['placeholder' => 'Введите дату','style'=>'width:175px'],
             'pluginOptions' => [
                 'autoclose' => true,
