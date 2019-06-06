@@ -11,7 +11,7 @@ img {
 .competition {
     background: #fff none repeat scroll 0 0;
     border: 1px solid #c0c0c0;
-    height: 500px;
+    height: 600px;
     overflow: hidden;
     padding: 25px 15px;
     position: relative;
@@ -23,7 +23,8 @@ img {
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
 }
 .competition-img {
-    height: auto;
+    display: block; /*overflow: hidden;*/
+    max-height: 90px;
     max-width: 100%;
 }
 .competition-title a {

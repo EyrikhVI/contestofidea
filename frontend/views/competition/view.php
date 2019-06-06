@@ -35,8 +35,9 @@ use yii\helpers\Html;
 
                                     <div class="competitionview-desc"><?= $competition->note?></div>
                                     <?php if (!empty($competition->logo)): ?>
-                                        <div class="competition-img"><?= Html::img(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->logo, ['alt' => 'Логотип']);?></div>
+                                        <div class="competitionview-img"><?= Html::img(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->logo, ['alt' => 'Логотип']);?></div>
                                     <?php endif;?>
+
                                     <div class="competitionview-desc"><?= $competition->conditions?></div>
                                     <div class="competitionview-date">Период проведения:<br><?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
                                         Период приема заявок:<br><?= $competition->application_start_date_competition.'-'.$competition->application_end_date_competition?><br>
@@ -45,6 +46,9 @@ use yii\helpers\Html;
                                                 ['class'=> Yii::$app->user->identity->id!=$competition->user->id?'btn btn-primary disabled':'btn btn-primary']) ?>
                                             <?= Html::a('<i class="far fa-file-pdf"></i>'.' Положение', Url::to(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->conditions_file),
                                                 ['class'=> empty($competition->conditions_file)?'btn btn-primary disabled':'btn btn-primary']) ?>
+                                            <?= Html::a('<i class="far fa-file-alt"></i>'.' Участвовать', Url::to(['application/create','id'=>$competition->id]),
+                                            ['class'=> empty($competition->conditions_file)?'btn btn-primary disabled':'btn btn-primary']) ?>
+
                                         </div>
 
 
