@@ -33,7 +33,7 @@ img {
     font-size: 18px;
 }
 .competition-desc  {
-    max-height: 100px;
+    max-height: 120px;
     overflow: hidden;
     text-overflow: ellipsis; /* Добавляем многоточие */
 }
