@@ -6,16 +6,17 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Application */
 
-$this->title = 'Create Application';
-$this->params['breadcrumbs'][] = ['label' => 'Applications', 'url' => ['index']];
+$this->title = 'Заявка на конкурс';
+$this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="application-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <h3><?=$competition->name?></h3>
+    <h3><?=$user->id?></h3>
     <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model, 'user'=>$user,
     ]) ?>
 
 </div>

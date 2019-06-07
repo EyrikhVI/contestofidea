@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\models\User;
+use frontend\models\Competition;
 use Yii;
 use frontend\models\Application;
 use frontend\models\ApplicationSearch;
@@ -62,16 +64,21 @@ class ApplicationController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
+        $id_competition=YII::$app->request->get('id');
+        $user=User::findOne(Yii::$app->user->identity->getId());
+        $competition=Competition::findOne($id_competition);
         $model = new Application();
-
+        $model->setScenario('create');
+        $model->id_competition=$id_competition;
+        $model->id_user=$user->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model, 'user'=>$user, 'competition'=>$competition,
         ]);
     }
 

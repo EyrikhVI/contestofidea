@@ -3,6 +3,10 @@
 namespace frontend\models;
 use common\models\user;
 use Yii;
+use yii\db\ActiveRecord;
+use common\behaviors\DateToTimeBehavior;
+use yii\behaviors\TimestampBehavior;
+use mohorev\file\UploadBehavior;
 
 /**
  * This is the model class for table "application".
@@ -20,8 +24,12 @@ use Yii;
  * @property Competition $competition
  * @property User $user
  */
-class Application extends \yii\db\ActiveRecord
+class Application extends ActiveRecord
 {
+    public $created_at_application;
+    public $updated_at_application;
+
+    public $application_file_upload;
     /**
      * {@inheritdoc}
      */
@@ -38,7 +46,9 @@ class Application extends \yii\db\ActiveRecord
         return [
             [['id_competition', 'id_user', 'name', 'created_at', 'updated_at'], 'required'],
             [['id_competition', 'id_user', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'note', 'file'], 'string', 'max' => 255],
+            [['name', 'note', 'application_file_upload'], 'string', 'max' => 255],
+            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'zip, rar', 'maxSize' => 1024*1024,'on' => ['create']],
+            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'zip, rar', 'maxSize' => 1024*1024,'on' => ['update']],
             [['id_competition'], 'exist', 'skipOnError' => true, 'targetClass' => Competition::className(), 'targetAttribute' => ['id_competition' => 'id']],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
@@ -76,5 +86,44 @@ class Application extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'id_user']);
+    }
+    public function behaviors()
+    {
+        return [
+
+            [
+                'class' => DateToTimeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'created_at_application',
+                    ActiveRecord::EVENT_AFTER_FIND => 'created_at_application',
+                ],
+                'timeAttribute' => 'created_at',
+                'format'=>'d.m.Y H:i',
+            ],
+            [
+                'class' => DateToTimeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => 'updated_at_application',
+                    ActiveRecord::EVENT_AFTER_FIND => 'updated_at_application',
+                ],
+                'timeAttribute' => 'updated_at',
+                'format'=>'d.m.Y H:i',
+            ],
+
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'file',
+                'scenarios' => ['create', 'update'],
+                'path' => Yii::$app->params['CompetitionFilePath'].'{id}',
+                'url' => Yii::$app->params['CompetitionFileURL'].'{id}',
+            ],
+        ];
     }
 }
