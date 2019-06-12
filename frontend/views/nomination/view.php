@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Application */
+/* @var $model frontend\models\Nomination */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Номинации', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="application-view">
+<div class="nomination-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,28 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-
             [
                 'label'=>'Наименование конкурса',
                 'value'=>\frontend\models\Competition::findOne($model->id_competition)->name,
             ],
 
             'name',
-            'note',
-            'file',
-            'status',
-//            'created_at',
-            [
-                'attribute' => 'created_at',
-                'format' =>  ['date', 'php:d-m-Y H:i:s'],
-                'options' => ['width' => '200']
-            ],
-//            'updated_at',
-            [
-                'attribute' => 'updated_at',
-                'format' =>  ['date', 'php:d-m-Y H:i:s'],
-                'options' => ['width' => '200']
-            ],
         ],
     ]) ?>
 

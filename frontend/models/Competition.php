@@ -37,6 +37,13 @@ use yii\web\UploadedFile;
  */
 class Competition extends ActiveRecord
 {
+    //Константы статусов конкурсов
+    const STATUS_CREATED = 1;
+    const STATUS_PUBLISHED = 5;
+    const STATUS_CLOSED = 10;
+    const STATUS_ARCHIVED = 15;
+    const STATUS_DELETED = 20;
+
     public $start_date_competition;
     public $application_start_date_competition;
     public $application_end_date_competition;
@@ -60,14 +67,16 @@ class Competition extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'category_id', 'name', 'note', 'conditions', 'inform_letter', 'link_info_letter'], 'required'],
-            [['user_id', 'category_id', 'start_date', 'application_start_date', 'application_end_date', 'end_date', 'application_for_participant', 'application_for_competition', 'views_for_competition', 'status', 'created_at', 'updated_at', 'link_info_letter'], 'integer'],
-            [['name', 'logo_file_upload','note','conditions_file_upload', 'inform_letter'], 'string', 'max' => 255],
+            [['user_id', 'category_id', 'name', 'note', 'conditions'], 'required'],
+            [['user_id', 'category_id', 'start_date', 'application_start_date', 'application_end_date', 'end_date', 'application_for_participant', 'views_for_competition', 'status', 'created_at', 'updated_at', 'link_info_letter'], 'integer'],
+            [['name', 'logo_file_upload','note','conditions_file_upload'], 'string', 'max' => 255],
             [['conditions'], 'string','max'=>4000],
             [['conditions_file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 1024*1024,'on' => ['create']],
             [['conditions_file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 1024*1024,'on' => ['update']],
             [['logo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, gif', 'maxSize' => 1024*1024,'on' => ['create']],
             [['logo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, gif', 'maxSize' => 1024*1024,'on' => ['update']],
+            [['inform_letter'], 'file', 'skipOnEmpty' => true, 'extensions' => 'doc, docx, pdf', 'maxSize' => 1024*1024,'on' => ['create']],
+            [['inform_letter'], 'file', 'skipOnEmpty' => true, 'extensions' => 'doc, docx, pdf', 'maxSize' => 1024*1024,'on' => ['update']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['start_date_competition','application_start_date_competition','application_end_date_competition','end_date_competition' ], 'date', 'format' => 'php:d.m.Y h:i']
@@ -96,7 +105,6 @@ class Competition extends ActiveRecord
             'application_end_date_competition' => 'Дата окончания приема заявок',
             'end_date_competition' => 'Дата окончания конкурса',
             'application_for_participant' => 'Заявок от участника',
-            'application_for_competition' => 'Заявок конкурс',
             'views_for_competition' => 'Просмотров конкурса',
             'status' => 'Статус конкурса',
             'created_at' => 'Дата/время создания конкурса',
@@ -104,7 +112,13 @@ class Competition extends ActiveRecord
             'link_info_letter' => 'Ссылка на информационное письмо',
         ];
     }
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getApplications()
+    {
+        return $this->hasMany(Application::className(), ['id_competition' => 'id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -121,6 +135,20 @@ class Competition extends ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNominations()
+    {
+        return $this->hasMany(Nomination::className(), ['id_competition' => 'id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCriterions()
+    {
+        return $this->hasMany(Criterion::className(), ['id_competition' => 'id']);
+    }
 
     public function behaviors()
     {
@@ -197,6 +225,13 @@ class Competition extends ActiveRecord
             [
                 'class' => UploadBehavior::className(),
                 'attribute' => 'logo',
+                'scenarios' => ['create', 'update'],
+                'path' => Yii::$app->params['CompetitionFilePath'].'{id}',
+                'url' => Yii::$app->params['CompetitionFileURL'].'{id}',
+            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'inform_letter',
                 'scenarios' => ['create', 'update'],
                 'path' => Yii::$app->params['CompetitionFilePath'].'{id}',
                 'url' => Yii::$app->params['CompetitionFileURL'].'{id}',

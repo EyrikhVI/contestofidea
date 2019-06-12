@@ -78,7 +78,7 @@ class SiteController extends AppController
      */
     public function actionIndex()
     {
-        $competitions=Competition::find()->with('user')->limit(6)->orderBy('application_for_competition')->all();
+        $competitions=Competition::find()->with('user')->orderBy(['views_for_competition'=> SORT_DESC])->limit(6)->all();
         $this->setMeta('Contest of idea');
         $title='Популярные конкурсы';
         return $this->render('index',compact('competitions','user_competition','title' ));

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\datetime\DateTimePicker;
 use mihaildev\ckeditor\CKEditor;
+use frontend\models\Competition;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Competition */
@@ -59,8 +60,14 @@ use mihaildev\ckeditor\CKEditor;
             'height'=>100,
         ],
     ]); ?>
-
-    <?= $form->field($model, 'inform_letter')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+        <div class="col-lg-9">
+    <?= $form->field($model, 'link_info_letter')->textInput() ?>
+        </div>
+        <div class="col-lg-3">
+        <?= $form->field($model, 'inform_letter')->fileInput() ?>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-3">
     <?= $form->field($model, 'start_date_competition')->widget(DateTimePicker::classname(), [
@@ -105,13 +112,19 @@ use mihaildev\ckeditor\CKEditor;
     </div>
     <div class="row">
         <div class="col-lg-3">
-    <?= $form->field($model, 'application_for_participant')->textInput(['style'=>'width:175px']) ?>
+    <?= $form->field($model, 'application_for_participant')->dropDownList(['1' => '1', '2' => '2']); ?>
         </div>
         <div class="col-lg-3">
-    <?= $form->field($model, 'status')->textInput(['style'=>'width:175px']) ?>
+    <?= $form->field($model, 'status')->dropDownList([Competition::STATUS_CREATED=>'Создан',
+        Competition::STATUS_PUBLISHED => 'Опубликован', Competition::STATUS_CLOSED=> 'Закрыт',
+        Competition::STATUS_ARCHIVED =>'Заархивирован', Competition::STATUS_DELETED=>'Удален'],
+        ['options' => [Competition::STATUS_PUBLISHED=> ['disabled' =>true],
+            Competition::STATUS_CLOSED=> ['disabled' =>true],
+            Competition::STATUS_ARCHIVED=> ['disabled' =>true],
+            Competition::STATUS_DELETED=> ['disabled' =>true]]]) ?>
         </div>
     </div>
-    <?= $form->field($model, 'link_info_letter')->textInput() ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('<i class="fas fa-save"></i>'.' Сохранить', ['class' => 'btn btn-success']) ?>

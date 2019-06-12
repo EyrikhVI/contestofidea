@@ -7,6 +7,7 @@
 namespace frontend\controllers;
 use frontend\models\Category;
 use frontend\models\Competition;
+use frontend\models\Application;
 use Yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -49,7 +50,10 @@ class CompetitionController extends AppController
     public function actionView($id){
     $id=Yii::$app->request->get('id');
     $competition=Competition::findOne($id);
-    return $this->render('view',compact('competition'));
+    $applications=Application::find()->where(['id_competition'=>$id])->count();
+    $competition->updateCounters(['views_for_competition' => 1]);//Увеличим кол-во просмотров
+
+    return $this->render('view',compact('competition','applications'));
     }
     /**
      * Creates a new Competition model.

@@ -93,8 +93,8 @@ AppAsset::register($this);
             '<li class="dropdown-header">Dropdown Header</li>',*/
             ['label' => '<i class="fas fa-user"></i>'.' Мой профиль', 'url' => URL::to(['/site/profile'])],
             ['label' => '<i class="fas fa-filter"></i>'.' Мои конкурсы', 'url' => URL::to(['/site/view-by-user'])],
-            ['label' => '<i class="fab fa-creative-commons-share"></i>'.' Создать конкурс', 'url' => URL::to(['/competition/create']),'visible' =>Yii::$app->user->getIdentity()->isOrganizer()or Yii::$app->user->getIdentity()->isAdmin()],
-
+            ['label' => '<i class="fas fa-file-contract"></i>'.' Создать конкурс', 'url' => URL::to(['/competition/create']),'visible' =>Yii::$app->user->getIdentity()->isOrganizer()or Yii::$app->user->getIdentity()->isAdmin()],
+            ['label' => '<i class="fas fa-filter"></i>'.' Мои заявки', 'url' => URL::to(['/application/index'])],
             ]];
 
     }

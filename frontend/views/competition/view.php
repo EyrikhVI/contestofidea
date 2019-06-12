@@ -30,16 +30,19 @@ use yii\helpers\Html;
                                 <div class="competitionview">
                                     <div class="competitionview-title"><?= $competition->name?></a></div>
 
-                                    <?= '<i class="fas fa-folder-open"></i>'.'Категория конкурса: '.$competition->category->name?>
-                                    <?= '<i class="fas fa-user"></i>'.'Организатор:'.$competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
-
+                                     <i class="fas fa-folder-open"></i> Категория конкурса: <?=$competition->category->name?>
+                                     <i class="fas fa-user"></i> Организатор: <?=$competition->user->last_name.' '.$competition->user->first_name.' '.$competition->user->patronymic?>
+                                     <?php if (!empty($competition->inform_letter)): ?>
+                                     <i class="fas fa-envelope"></i><?= Html::a(' Информационное письмо',Url::to(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->inform_letter))?>
+                                    <?php endif;?>
                                     <div class="competitionview-desc"><?= $competition->note?></div>
                                     <?php if (!empty($competition->logo)): ?>
                                         <div class="competitionview-img"><?= Html::img(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->logo, ['alt' => 'Логотип']);?></div>
                                     <?php endif;?>
 
                                     <div class="competitionview-desc"><?= $competition->conditions?></div>
-                                    <div class="competitionview-date">Период проведения:<br><?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
+                                    <div class="competitionview-date">Просмотров: <span class="badge"><?=$competition->views_for_competition?></span> Подано заявок: <span class="badge"><?=$applications?></span><br> Период проведения:<br>
+                                                <?= $competition->start_date_competition.'-'.$competition->end_date_competition?><br>
                                         Период приема заявок:<br><?= $competition->application_start_date_competition.'-'.$competition->application_end_date_competition?><br>
                                         Создан <?= $competition->created_at_competition?><br>Изменен <?= $competition->updated_at_competition?><br></div>
                                         <div class="competitionview-date"><?= Html::a('<i class="fas fa-edit"></i>'.' Изменить', Url::to(['competition/update','id'=>$competition->id]),
@@ -47,7 +50,7 @@ use yii\helpers\Html;
                                             <?= Html::a('<i class="far fa-file-pdf"></i>'.' Положение', Url::to(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->conditions_file),
                                                 ['class'=> empty($competition->conditions_file)?'btn btn-primary disabled':'btn btn-primary']) ?>
                                             <?= Html::a('<i class="far fa-file-alt"></i>'.' Участвовать', Url::to(['application/create','id'=>$competition->id]),
-                                            ['class'=> empty($competition->conditions_file)?'btn btn-primary disabled':'btn btn-primary']) ?>
+                                            ['class'=> !(Yii::$app->user->getIdentity()->isParticipant()or Yii::$app->user->getIdentity()->isAdmin())?'btn btn-primary disabled':'btn btn-primary']) ?>
 
                                         </div>
 

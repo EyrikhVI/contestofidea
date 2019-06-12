@@ -4,20 +4,20 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\ApplicationSearch */
+/* @var $searchModel frontend\models\CriterionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Ваши заявки';
+$this->title = 'Критерии';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="application-index">
+<div class="criterion-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-<!--    <p>
-        <?/*= Html::a('Create Application', ['create'], ['class' => 'btn btn-success']) */?>
-    </p>-->
+    <p>
+        <?= Html::a('Создать критерий', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -29,18 +29,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'id',
                 'headerOptions' => ['style' => 'width:100px'],
             ],
-//            'id_user',
-            'name',
-            'note',
-            'file',
-/*            [
-            'attribute' => 'Наименование конкурса',
-            'value'=>'competition.name',
-            ],*/
 
-            'status',
-            //'created_at',
-            //'updated_at',
+            [
+                'attribute' => 'Наименование конкурса',
+                'value'=>'competition.name',
+            ],
+            'name',
+            [
+                'attribute' => 'rate',
+                'headerOptions' => ['style' => 'width:100px'],
+            ],
+
+            [
+                'attribute' => 'max_ratig',
+                'headerOptions' => ['style' => 'width:100px'],
+            ],
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

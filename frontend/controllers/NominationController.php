@@ -2,20 +2,18 @@
 
 namespace frontend\controllers;
 
-use common\models\User;
-use frontend\models\Competition;
 use Yii;
-use frontend\models\Application;
-use frontend\models\ApplicationSearch;
+use frontend\models\Competition;
+use frontend\models\Nomination;
+use frontend\models\NominationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\data\Pagination;
 
 /**
- * ApplicationController implements the CRUD actions for Application model.
+ * NominationController implements the CRUD actions for Nomination model.
  */
-class ApplicationController extends Controller
+class NominationController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -33,15 +31,14 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Lists all Application models.
+     * Lists all Nomination models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ApplicationSearch();
+        $searchModel = new NominationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        //Вывод заявок только текущего пользователя
-        $dataProvider->query->andWhere(['application.id_user' => Yii::$app->user->identity->getId()]);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -49,7 +46,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Displays a single Application model.
+     * Displays a single Nomination model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,36 +59,28 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Creates a new Application model.
+     * Creates a new Nomination model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
      * @return mixed
      */
     public function actionCreate($id)
     {
         $id_competition=YII::$app->request->get('id');
-//        $user=User::find()->all();
         $competition=Competition::findOne($id_competition);
-        $query=Application::find()->with('competition')->with('user')->where(['id_competition'=>$id_competition]);
-        $pages=new Pagination(['totalCount'=>$query->count(),'pageSize'=>12,'forcePageParam'=>false,'pageSizeParam'=>false]);
-        $applications=$query->offset($pages->offset)->limit($pages->limit)->all();
-        $user=User::findOne(Yii::$app->user->identity->getId());
-        $count_application=$query->count();//Количество заявок на конкурс
-        $model = new Application();
-        $model->setScenario('create');
-        $model->id_competition=$id_competition;
-        $model->id_user=$user->id;
+        $model = new Nomination();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model' => $model, 'user'=>$user, 'competition'=>$competition, 'applications'=>$applications,
-            'pages'=>$pages, 'count_application'=>$count_application,
+            'model' => $model, 'competition'=>$competition,
         ]);
     }
 
     /**
-     * Updates an existing Application model.
+     * Updates an existing Nomination model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -101,26 +90,19 @@ class ApplicationController extends Controller
     {
         $model = $this->findModel($id);
         $id_competition=$model->id_competition;
-//        $user=User::find()->all();
         $competition=Competition::findOne($id_competition);
-        $query=Application::find()->with('competition')->with('user')->where(['id_competition'=>$id_competition]);
-        $pages=new Pagination(['totalCount'=>$query->count(),'pageSize'=>12,'forcePageParam'=>false,'pageSizeParam'=>false]);
-        $applications=$query->offset($pages->offset)->limit($pages->limit)->all();
-        $user=User::findOne(Yii::$app->user->identity->getId());
-        $model->setScenario('update');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model, 'user'=>$user, 'competition'=>$competition, 'applications'=>$applications,'pages'=>$pages,
-
+            'model' => $model, 'competition'=>$competition,
         ]);
     }
 
     /**
-     * Deletes an existing Application model.
+     * Deletes an existing Nomination model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -134,15 +116,15 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Finds the Application model based on its primary key value.
+     * Finds the Nomination model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Application the loaded model
+     * @return Nomination the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Application::findOne($id)) !== null) {
+        if (($model = Nomination::findOne($id)) !== null) {
             return $model;
         }
 
