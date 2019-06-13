@@ -2,6 +2,8 @@
 namespace common\models;
 
 use frontend\models\Competition;
+use frontend\models\Application;
+use frontend\models\Expert;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -195,6 +197,13 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+    /**
+     * Получение полного имени пользователя
+     */
+    public function getFullName()
+    {
+        return $this->last_name . ' ' . $this->first_name . ' ' . $this->patronymic;
+    }
 
     public static function roles()
     {
@@ -242,9 +251,27 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return ($this->role == self::ROLE_PARTICIPANT);
     }
-    public function getCompetition()
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getApplications()
     {
-        return $this->hasMany(Competition::className(),['user_id'=>'id']);
+        return $this->hasMany(Application::className(), ['id_user' => 'id']);
+    }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompetitions()
+    {
+        return $this->hasMany(Competition::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExperts()
+    {
+        return $this->hasMany(Expert::className(), ['id_user' => 'id']);
     }
 }

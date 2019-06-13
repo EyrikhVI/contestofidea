@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Criterion */
+/* @var $model frontend\models\Expert */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Критерии', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Эксперты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="criterion-view">
+<div class="expert-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -34,9 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>\frontend\models\Competition::findOne($model->id_competition)->name,
             ],
 
-            'name',
-            'rate',
-            'max_ratig',
+            'id_user',
         ],
     ]) ?>
 

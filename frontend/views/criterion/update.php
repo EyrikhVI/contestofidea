@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Criterion */
 
-$this->title = 'Update Criterion: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Criterions', 'url' => ['index']];
+$this->title = 'Изменить критерий: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Критерии', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="criterion-update">
 

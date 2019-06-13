@@ -119,6 +119,7 @@ class Competition extends ActiveRecord
     {
         return $this->hasMany(Application::className(), ['id_competition' => 'id']);
     }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -138,18 +139,26 @@ class Competition extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNominations()
-    {
-        return $this->hasMany(Nomination::className(), ['id_competition' => 'id']);
-    }
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getCriterions()
     {
         return $this->hasMany(Criterion::className(), ['id_competition' => 'id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExperts()
+    {
+        return $this->hasMany(Expert::className(), ['id_competition' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNominations()
+    {
+        return $this->hasMany(Nomination::className(), ['id_competition' => 'id']);
+    }
     public function behaviors()
     {
         return [

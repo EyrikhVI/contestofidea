@@ -49,7 +49,13 @@ return [
                 'application/create/<id:\d+>'=>'application/create',
                 'application/update/<id:\d+>'=>'application/update',
                 'nomination/create/<id:\d+>'=>'nomination/create',
+                'nomination/updare/<id:\d+>'=>'nomination/update',
                 'criterion/create/<id:\d+>'=>'criterion/create',
+                'criterion/update/<id:\d+>'=>'criterion/update',
+                'expert/create/<id:\d+>'=>'expert/create',
+                'expert/update/<id:\d+>'=>'expert/update',
+
+
                 ],
         ],
     ],
