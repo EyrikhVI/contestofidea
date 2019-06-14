@@ -34,7 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>\frontend\models\Competition::findOne($model->id_competition)->name,
             ],
 
-            'id_user',
+            [
+                'attribute' => 'Пользователь',
+                'format' => 'html',
+                'value' => function ($model) {
+                    /** @var \common\models\User $model */
+                    return \common\models\User::findOne($model->id_user)->getFullName();
+                }
+            ]
+
         ],
     ]) ?>
 

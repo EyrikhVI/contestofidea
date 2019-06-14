@@ -26,8 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'id_competition',
-            'id_user',
+            [
+                'attribute' => 'Наименование конкурса',
+                'value'=>'competition.name',
+            ],
+
+           [
+                'attribute' => 'Пользователь',
+                'format' => 'html',
+                'value' => function ($model) {
+                    /** @var \common\models\User $model */
+                    return \common\models\User::findOne($model->id_user)->getFullName();
+                }
+            ],
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

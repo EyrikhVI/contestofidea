@@ -22,7 +22,8 @@
         "kartik-v/yii2-widget-datetimepicker": "^1.4",
         "mihaildev/yii2-ckeditor": "*",
         "mohorev/yii2-upload-behavior": "*",
-        "kartik-v/yii2-widget-rangeinput": "dev-master"
+        "kartik-v/yii2-widget-rangeinput": "dev-master",
+        "drsdre/yii2-wizardwidget": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

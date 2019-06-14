@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = 'Изменить';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model,  'id_competition'=>$competition->id, 'usermap'=>$usermap,
     ]) ?>
 
 </div>
