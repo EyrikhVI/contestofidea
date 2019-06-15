@@ -54,7 +54,7 @@ return [
                 'criterion/update/<id:\d+>'=>'criterion/update',
                 'expert/create/<id:\d+>'=>'expert/create',
                 'expert/update/<id:\d+>'=>'expert/update',
-                'wizard/index/<id:\d+>'=>'wizard/index',
+                'wizard/index/<id:\d+>,<step:\d+>'=>'wizard/index',
 
 
                 ],
