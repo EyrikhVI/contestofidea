@@ -14,9 +14,9 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_competition')->dropDownList(ArrayHelper::map(Competition::findAll($id_competition), 'id', 'name')) ?>
+    <?= $form->field($model_nomination, 'id_competition')->dropDownList(ArrayHelper::map(Competition::findAll($id_competition), 'id', 'name')) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model_nomination, 'name')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('<i class="fas fa-save"></i>'.' Сохранить', ['class' => 'btn btn-success']) ?>

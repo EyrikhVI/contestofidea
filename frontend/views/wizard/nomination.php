@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <h3><?=$competition->name?></h3>
 
-    <?= $this->render('_form', [
-        'model' => $model, 'id_competition'=>$competition->id,
+    <?= $this->render('nomination_form', [
+        'model_nomination' => $model_nomination, 'id_competition'=>$competition->id,
     ]) ?>
 
 </div>
