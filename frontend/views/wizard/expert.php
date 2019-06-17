@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Expert */
 
-$this->title = 'Назначить эксперта';
+/*$this->title = 'Назначить эксперта';
 $this->params['breadcrumbs'][] = ['label' => 'Эксперты', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;*/
 ?>
 <div class="expert-create">
 

@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Criterion */
 /* @var $competition frontend\models\Competition */
-$this->title = 'Создать критерий';
+/*$this->title = 'Создать критерий';
 $this->params['breadcrumbs'][] = ['label' => 'Критерии', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;*/
 ?>
 <div class="criterion-create">
 
