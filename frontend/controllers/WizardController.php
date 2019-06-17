@@ -18,7 +18,7 @@ class WizardController extends \yii\web\Controller
         $request = Yii::$app->request;
         $id_competition=YII::$app->request->get('id');
         $competition=Competition::findOne($id_competition);
-        $user=User::find()->where(['role'=>User::ROLE_ORGANIZER])->all();
+        $user=User::find()->where(['role'=>User::ROLE_EXPERT])->all();
         $usermap = ArrayHelper::map($user,'id',
             function ($user, $defaultValue) {
                 return $user->getFullName();

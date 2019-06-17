@@ -18,6 +18,7 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,6 +57,9 @@ AppAsset::register($this);
             'items' => [
                 ['label' =>'Пользователи','visible' =>Yii::$app->user->getIdentity()->isAdmin(), 'url' => URL::to(['/user-operation/index'])],
                 ['label' =>'Категории','visible' =>true, 'url' => URL::to(['/category-operation/index'])],
+                ['label' =>'Номинации','visible' =>true, 'url' => URL::to(['/nomination-operation/index'])],
+                ['label' =>'Критерии','visible' =>true, 'url' => URL::to(['/criterion-operation/index'])],
+                ['label' =>'Эксперты','visible' =>true, 'url' => URL::to(['/expert-operation/index'])],
 /*                '<li class="divider"></li>',
                 '<li class="dropdown-header">Dropdown Header</li>',
                 ['label' => '<i class="fas fa-user"></i>'.' Мой профиль', 'url' => URL::to([''])],

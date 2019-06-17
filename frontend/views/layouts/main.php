@@ -94,7 +94,10 @@ AppAsset::register($this);
             ['label' => '<i class="fas fa-user"></i>'.' Мой профиль', 'url' => URL::to(['/site/profile'])],
             ['label' => '<i class="fas fa-filter"></i>'.' Мои конкурсы', 'url' => URL::to(['/site/view-by-user'])],
             ['label' => '<i class="fas fa-file-contract"></i>'.' Создать конкурс', 'url' => URL::to(['/competition/create']),'visible' =>Yii::$app->user->getIdentity()->isOrganizer()or Yii::$app->user->getIdentity()->isAdmin()],
+            ['label' => '<i class="fas fa-cog"></i>'.' Параметры конкурса', 'url' => URL::to(['/wizard/index/','id'=>Yii::$app->request->get('id'),'step'=>'1']),
+                'visible'=>Yii::$app->controller->id=='competition'and Yii::$app->controller->action->id=='view'],
             ['label' => '<i class="fas fa-filter"></i>'.' Мои заявки', 'url' => URL::to(['/application/index'])],
+
             ]];
 
     }
@@ -111,7 +114,7 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
+        <?= $content; ?>
     </div>
 </div>
 

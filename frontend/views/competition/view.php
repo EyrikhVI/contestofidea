@@ -49,9 +49,9 @@ use yii\helpers\Html;
                                                 ['class'=> Yii::$app->user->identity->id!=$competition->user->id?'btn btn-primary disabled':'btn btn-primary']) ?>
                                             <?= Html::a('<i class="far fa-file-pdf"></i>'.' Положение', Url::to(Yii::$app->params['CompetitionFileURL'] . $competition->id . '/'. $competition->conditions_file),
                                                 ['class'=> empty($competition->conditions_file)?'btn btn-primary disabled':'btn btn-primary']) ?>
-                                            <?= Html::a('<i class="far fa-file-alt"></i>'.' Участвовать', Url::to(['application/create','id'=>$competition->id]),
+                                            <?php if (!Yii::$app->user->isGuest): ?> <?=Html::a('<i class="far fa-file-alt"></i>'.' Участвовать', Url::to(['application/create','id'=>$competition->id]),
                                             ['class'=> !(Yii::$app->user->getIdentity()->isParticipant()or Yii::$app->user->getIdentity()->isAdmin())?'btn btn-primary disabled':'btn btn-primary']) ?>
-
+                                            <?php endif;?>
                                         </div>
 
 
