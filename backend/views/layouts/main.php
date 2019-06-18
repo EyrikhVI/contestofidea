@@ -57,6 +57,7 @@ AppAsset::register($this);
             'items' => [
                 ['label' =>'Пользователи','visible' =>Yii::$app->user->getIdentity()->isAdmin(), 'url' => URL::to(['/user-operation/index'])],
                 ['label' =>'Категории','visible' =>true, 'url' => URL::to(['/category-operation/index'])],
+                ['label' =>'Заявки','visible' =>true, 'url' => URL::to(['/application-operation/index'])],
                 ['label' =>'Номинации','visible' =>true, 'url' => URL::to(['/nomination-operation/index'])],
                 ['label' =>'Критерии','visible' =>true, 'url' => URL::to(['/criterion-operation/index'])],
                 ['label' =>'Эксперты','visible' =>true, 'url' => URL::to(['/expert-operation/index'])],
