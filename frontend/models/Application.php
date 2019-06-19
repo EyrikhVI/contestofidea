@@ -106,6 +106,15 @@ class Application extends ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExpertises()
+    {
+        return $this->hasMany(Expertise::className(), ['id_application' => 'id']);
+    }
+
     public function behaviors()
     {
         return [

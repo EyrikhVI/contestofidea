@@ -20,7 +20,7 @@ class m190618_103001_create_expertise_table extends Migration
             'id_nomination'=>$this->integer()->notNull()->comment('Ссылка id из таблицы nomination'),
             'id_criterion'=>$this->integer()->notNull()->comment('Ссылка id из таблицы criterion'),
             'note'=>$this->string()->comment('Примечание'),
-            'rate'=>$this->smallInteger(3)->notNull()->comment('Оценка'),
+            'rate'=>$this->decimal(5,2)->notNull()->comment('Оценка'),
         ]);
         $this->addForeignKey('expertise_user_id_fk','{{%expertise}}', 'id_user', '{{%user}}',
             'id');

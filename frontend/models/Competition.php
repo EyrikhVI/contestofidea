@@ -159,6 +159,15 @@ class Competition extends ActiveRecord
     {
         return $this->hasMany(Nomination::className(), ['id_competition' => 'id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExpertises()
+    {
+        return $this->hasMany(Expertise::className(), ['id_competition' => 'id']);
+    }
+
     public function behaviors()
     {
         return [
