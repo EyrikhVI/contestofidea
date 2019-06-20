@@ -5,6 +5,9 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Expertise;
 use frontend\models\ExpertiseSearch;
+use frontend\models\Application;
+use frontend\models\Competition;
+use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -59,14 +62,23 @@ class ExpertiseController extends Controller
     //Заявки для оценки экспертом
     public function actionViewByExpert()
     {
+
         $id=YII::$app->user->getId();
-        $application=Application::find()->with('competition')->with('expert')->where(['id_competition'=>$id_competition]);
-        $query=Competition::find()->where(['user_id'=>$id]);
-        $pages=new Pagination(['totalCount'=>$query->count(),'pageSize'=>6,'forcePageParam'=>false,'pageSizeParam'=>false]);
-        $competitions=$query->offset($pages->offset)->limit($pages->limit)->all();
+//        $application=Application::find()->with('competition')->with('expert')->where(['id_competition'=>'10'])->all();
+        $applications=Application::find()->with('competition')->with('nomination')->
+//            select('expert.*')->
+        leftJoin('expert','expert.id_competition=application.id_competition')->
+            where(['expert.id_user'=>Yii::$app->user->identity->getId()])->all();
+//        debug($applications);
+//        $query=Competition::find()->where(['user_id'=>$id]);
+//        $pages=new Pagination(['totalCount'=>$query->count(),'pageSize'=>6,'forcePageParam'=>false,'pageSizeParam'=>false]);
+//        $competitions=$query->offset($pages->offset)->limit($pages->limit)->all();
         $user=User::findOne($id);
-        $title='Мои конкурсы';
-        return $this->render('index',compact('competitions','pages','user','title'));
+//        $title='Мои конкурсы';
+//        return $this->render('index',compact('competitions','pages','user','title'));
+//        return $this->render('application',compact('application'));
+        return $this->render('application', compact('applications'));
+
     }
     /**
      * Creates a new Expertise model.

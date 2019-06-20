@@ -11,7 +11,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
-
+use yii\data\ActiveDataProvider;
 /**
  * ApplicationController implements the CRUD actions for Application model.
  */
@@ -44,6 +44,37 @@ class ApplicationController extends Controller
         $dataProvider->query->andWhere(['application.id_user' => Yii::$app->user->identity->getId()]);
         return $this->render('index', [
             'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionIndexExpert()
+    {
+//        $searchModel = new ApplicationSearch();
+        $query=Application::find()->with('competition')->with('nomination')->
+//            select('expert.*')->
+        leftJoin('expert','expert.id_competition=application.id_competition')->
+        where(['expert.id_user'=>Yii::$app->user->identity->getId()]);
+        $count = $query->count();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'totalCount' => $count,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'attributes' => [
+                    'title',
+                    'view_count',
+                    'created_at',
+                ],
+            ],
+        ]);
+
+// returns an array of data rows
+        $models = $dataProvider->getModels();
+
+        return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }

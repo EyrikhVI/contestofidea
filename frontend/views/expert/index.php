@@ -27,12 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             [
-                'attribute' => 'Наименование конкурса',
+                'label' => 'Наименование конкурса',
                 'value'=>'competition.name',
             ],
 
            [
-                'attribute' => 'Пользователь',
+                'label' => 'Пользователь',
                 'format' => 'html',
                 'value' => function ($model) {
                     /** @var \common\models\User $model */

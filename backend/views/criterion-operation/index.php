@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'attribute' => 'Наименование конкурса',
+                'attribute' => 'name',
                 'value'=>'competition.name',
             ],
             'name',
