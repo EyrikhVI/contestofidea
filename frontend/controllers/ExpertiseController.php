@@ -2,7 +2,9 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Criterion;
 use Yii;
+use yii\base\Model;
 use frontend\models\Expertise;
 use frontend\models\ExpertiseSearch;
 use frontend\models\Application;
@@ -85,9 +87,14 @@ class ExpertiseController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
-        $model = new Expertise();
+        $application=Application::findOne($id);
+        $competition=Competition::findOne($application->id_competition);
+        $criterion=Criterion::find()->where(['id_competition'=>$competition->id])->all();
+        $criterion_count=Criterion::find()->where(['id_competition'=>$competition->id])->count();
+
+ /*       $model = new Expertise();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -95,7 +102,22 @@ class ExpertiseController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-        ]);
+        ]);*/
+        $count = $criterion_count;
+        $expertises = [new Expertise()];
+        for($i = 1; $i < $count; $i++) {
+            $expertises[] = new Expertise();
+        }
+
+        if (Model::loadMultiple($expertises, Yii::$app->request->post()) &&
+            Model::validateMultiple($expertises)) {
+            foreach ($expertises as $expertise) {
+                $expertise->save(false);
+            }
+            return $this->redirect('index');
+        }
+
+        return $this->render('create', ['expertises' => $expertises, 'application'=>$application,'competition'=>$competition]);
     }
 
     /**

@@ -42,7 +42,15 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {rate}',
+                'buttons' => [
+                    'rate' => function ($url,$model,$key) {
+                        return Html::a('<span class="glyphicon glyphicon-star-empty"></span>', ['expertise/create', 'id'=>$model->id],['title'=>'Оценить заявку']);
+                    },
+                ],
+            ],
         ],
     ]); ?>
 </div>
