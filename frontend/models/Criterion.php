@@ -49,7 +49,7 @@ class Criterion extends \yii\db\ActiveRecord
             'id_competition' => 'Наименование конкурса',
             'name' => 'Наименование критерия',
             'rate' => 'Вес критерия',
-            'max_ratig' => 'Максимальная оценка',
+            'max_rating' => 'Максимальная оценка',
         ];
     }
 

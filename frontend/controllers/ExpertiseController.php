@@ -13,6 +13,8 @@ use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
+use yii\data\ActiveDataProvider;
 
 /**
  * ExpertiseController implements the CRUD actions for Expertise model.
@@ -61,27 +63,6 @@ class ExpertiseController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-    //Заявки для оценки экспертом
-    public function actionViewByExpert()
-    {
-
-        $id=YII::$app->user->getId();
-//        $application=Application::find()->with('competition')->with('expert')->where(['id_competition'=>'10'])->all();
-        $applications=Application::find()->with('competition')->with('nomination')->
-//            select('expert.*')->
-        leftJoin('expert','expert.id_competition=application.id_competition')->
-            where(['expert.id_user'=>Yii::$app->user->identity->getId()])->all();
-//        debug($applications);
-//        $query=Competition::find()->where(['user_id'=>$id]);
-//        $pages=new Pagination(['totalCount'=>$query->count(),'pageSize'=>6,'forcePageParam'=>false,'pageSizeParam'=>false]);
-//        $competitions=$query->offset($pages->offset)->limit($pages->limit)->all();
-        $user=User::findOne($id);
-//        $title='Мои конкурсы';
-//        return $this->render('index',compact('competitions','pages','user','title'));
-//        return $this->render('application',compact('application'));
-        return $this->render('application', compact('applications'));
-
-    }
     /**
      * Creates a new Expertise model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -90,35 +71,60 @@ class ExpertiseController extends Controller
     public function actionCreate($id)
     {
         $application=Application::findOne($id);
+        $user=User::findOne($application->id_user);
         $competition=Competition::findOne($application->id_competition);
         $criterion=Criterion::find()->where(['id_competition'=>$competition->id])->all();
         $criterion_count=Criterion::find()->where(['id_competition'=>$competition->id])->count();
-
- /*       $model = new Expertise();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);*/
         $count = $criterion_count;
         $expertises = [new Expertise()];
         for($i = 1; $i < $count; $i++) {
             $expertises[] = new Expertise();
         }
 
-        if (Model::loadMultiple($expertises, Yii::$app->request->post()) &&
-            Model::validateMultiple($expertises)) {
+        if (Model::loadMultiple($expertises, Yii::$app->request->post())&&Model::validateMultiple($expertises)){
+            $i=0;
             foreach ($expertises as $expertise) {
+                $expertise->rate=$expertise->rate*$criterion[$i]->rate/100;
                 $expertise->save(false);
+                $i++;
             }
             return $this->redirect('index');
         }
 
-        return $this->render('create', ['expertises' => $expertises, 'application'=>$application,'competition'=>$competition]);
+        return $this->render('create', ['expertises' => $expertises, 'application'=>$application,
+            'competition'=>$competition, 'criterion'=>$criterion, 'user'=>$user]);
     }
+
+    public function actionCompetitionExpertise($id){
+        $query=Expertise::find()->
+        select('id_competition,id_application,id_user,id_nomination,SUM(rate) as total_rate')->
+        where(['id_competition'=>$id])->
+        groupBy(['id_competition','id_application','id_user'])->
+        orderBy(['id_nomination'=>SORT_ASC,'total_rate'=>SORT_DESC]);
+        $count = $query->count();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'totalCount' => $count,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'attributes' => [
+                    'id_competition',
+                    'created_at',
+                ],
+            ],
+        ]);
+
+// returns an array of data rows
+        $models = $dataProvider->getModels();
+
+        return $this->render('expertises', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
 
     /**
      * Updates an existing Expertise model.

@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'attribute' => 'max_ratig',
+                'attribute' => 'max_rating',
                 'headerOptions' => ['style' => 'width:100px'],
             ],
 

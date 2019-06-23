@@ -25,6 +25,7 @@ use common\models\User;
  */
 class Expertise extends \yii\db\ActiveRecord
 {
+    public $total_rate; //Итоговая оценка заявки от всех экспертов
     /**
      * {@inheritdoc}
      */
@@ -96,5 +97,13 @@ class Expertise extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'id_user']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNomination()
+    {
+        return $this->hasOne(Nomination::className(), ['id' => 'id_nomination']);
     }
 }

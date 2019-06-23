@@ -18,7 +18,7 @@ class CriterionSearch extends Criterion
     public function rules()
     {
         return [
-            [['id', 'id_competition', 'max_ratig'], 'integer'],
+            [['id', 'id_competition', 'max_rating'], 'integer'],
             [['name'], 'safe'],
             [['rate'], 'number'],
         ];
@@ -63,7 +63,7 @@ class CriterionSearch extends Criterion
             'id' => $this->id,
             'id_competition' => $this->id_competition,
             'rate' => $this->rate,
-            'max_ratig' => $this->max_ratig,
+            'max_rating' => $this->max_rating,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

@@ -7,33 +7,57 @@ use yii\widgets\DetailView;
 /* @var $model frontend\models\Expertise */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Expertises', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Экспертизы заявок', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="expertise-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1><?/*= Html::encode($this->title) */?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?/*= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) */?>
+        <?/*= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы действительно хотите удалить запись??',
                 'method' => 'post',
             ],
-        ]) ?>
-    </p>
+        ]) */?>
+    </p>-->
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'id_competition',
-            'id_application',
-            'id_user',
-            'id_nomination',
-            'id_criterion',
+
+            [
+                'label'=>'Наименование конкурса',
+                'value'=>\frontend\models\Competition::findOne($model->id_competition)->name,
+            ],
+
+            [
+                'label'=>'Наименование аявки',
+                'value'=>\frontend\models\Application::findOne($model->id_application)->name,
+            ],
+
+            [
+                'label' => 'Пользователь',
+                'format' => 'html',
+                'value' => function ($model) {
+                    /** @var \common\models\User $model */
+                    return \common\models\User::findOne($model->id_user)->getFullName();
+                }
+            ],
+            [
+                'label'=>'Наименование номинации',
+                'value'=>\frontend\models\Nomination::findOne($model->id_nomination)->name,
+            ],
+
+            [
+                'label'=>'Наименование критерия',
+                'value'=>\frontend\models\Criterion::findOne($model->id_criterion)->name,
+            ],
+
             'note',
             'rate',
         ],

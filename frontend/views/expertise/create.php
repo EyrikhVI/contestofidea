@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Expertise */
 
-$this->title = 'Create Expertise';
-$this->params['breadcrumbs'][] = ['label' => 'Expertises', 'url' => ['index']];
+$this->title = 'Оценить заявку';
+$this->params['breadcrumbs'][] = ['label' => 'Оценки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="expertise-create">
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'expertises' => $expertises, 'application'=>$application,'competition'=>$competition,
+        'criterion'=>$criterion, 'user'=>$user
     ]) ?>
 
 </div>

@@ -70,7 +70,7 @@ class CriterionController extends Controller
 
         $model = new Criterion();
         $model->rate=100;
-        $model->max_ratig=5;
+        $model->max_rating=5;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

@@ -2,33 +2,26 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use frontend\models\Expertise;
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\ExpertiseSearch */
+/* @var $searchModel frontend\models\ApplicationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Экспертизы заявок';
+$this->title = 'Оценки конкурса';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="expertise-index">
+<div class="expertises-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-<!--    <p>
-        <?/*= Html::a('Create Expertise', ['create'], ['class' => 'btn btn-success']) */?>
-    </p>-->
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            [
-                'attribute' => 'id',
-                'headerOptions' => ['style' => 'width:100px'],
-            ],
 
             [
                 'label' => 'Наименование конкурса',
@@ -51,17 +44,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>'nomination.name',
             ],
             [
-                'label' => 'Наименование критерия',
-                'value'=>'criterion.name',
-            ],
-            [
-                'attribute' => 'rate',
+                'label' => 'Итоговая оценка',
+                'value'=>'total_rate',
                 'headerOptions' => ['style' => 'width:50px'],
             ],
-            'note',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '',
 
-            ['class' => 'yii\grid\ActionColumn',
-                'template' => '{view}']
+            ],
         ],
     ]); ?>
 </div>

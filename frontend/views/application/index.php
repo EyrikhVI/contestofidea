@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use frontend\models\Application;
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\ApplicationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -38,7 +38,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'value'=>'competition.name',
             ],*/
 
-            'status',
+            [
+                'attribute'=>'status',
+                'value'=>function($data){$data=array(Application::STATUS_CREATED=>'Создана',
+                    Application::STATUS_REJECTED => 'Отклонена', Application::STATUS_ACCEPTED=> 'Принята',
+                    Application::STATUS_ARCHIVED =>'Заархивирована', Application::STATUS_DELETED=>'Удалена');
+                    return $data['1'];
+                },
+            ],
+
             //'created_at',
             //'updated_at',
 

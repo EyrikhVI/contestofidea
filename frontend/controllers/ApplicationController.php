@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\User;
 use frontend\models\Competition;
+use frontend\models\Expertise;
 use Yii;
 use frontend\models\Application;
 use frontend\models\ApplicationSearch;
@@ -64,8 +65,7 @@ class ApplicationController extends Controller
             ],
             'sort' => [
                 'attributes' => [
-                    'title',
-                    'view_count',
+                    'id_competition',
                     'created_at',
                 ],
             ],
@@ -78,6 +78,7 @@ class ApplicationController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
 
     /**
      * Displays a single Application model.

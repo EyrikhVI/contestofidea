@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'name',
             'rate',
-            'max_ratig',
+            'max_rating',
         ],
     ]) ?>
 

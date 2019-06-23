@@ -55,6 +55,7 @@ return [
                 'expert/create/<id:\d+>'=>'expert/create',
                 'expert/update/<id:\d+>'=>'expert/update',
                 'wizard/index/<id:\d+>,<step:\d+>'=>'wizard/index',
+                'expertise/competition-expertise/<id:\d+>'=>'expertise/competition-expertise',
 
 
                 ],

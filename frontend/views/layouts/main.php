@@ -99,7 +99,7 @@ AppAsset::register($this);
             ['label' => '<i class="fas fa-filter"></i>'.' Мои заявки', 'url' => URL::to(['/application/index'])],
             ['label' => '<i class="far fa-file-alt"></i>'.' Участвовать', 'url' => URL::to(['application/create','id'=>Yii::$app->request->get('id')]),
                 'visible'=>Yii::$app->controller->id=='competition'and Yii::$app->controller->action->id=='view'],
-            ['label' => '<i class="far fa-file-alt"></i>'.' Оценить работы', 'url' => URL::to(['expertise/view-by-expert']),
+            ['label' => '<i class="far fa-file-alt"></i>'.' Оценить работы', 'url' => URL::to(['application/index-expert']),
                 'visible'=>Yii::$app->controller->id=='competition'and Yii::$app->controller->action->id=='view'],
 
             ]];
