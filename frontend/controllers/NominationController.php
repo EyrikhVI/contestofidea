@@ -31,7 +31,7 @@ class NominationController extends Controller
     }
 
     /**
-     * Lists all Nomination models.
+     * Конкурсные номинации
      * @return mixed
      */
     public function actionIndex()
@@ -46,7 +46,7 @@ class NominationController extends Controller
     }
 
     /**
-     * Displays a single Nomination model.
+     * Просмотр номинации.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,7 +59,7 @@ class NominationController extends Controller
     }
 
     /**
-     * Creates a new Nomination model.
+     * Создать номинацию к конкурсу
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -80,7 +80,7 @@ class NominationController extends Controller
     }
 
     /**
-     * Updates an existing Nomination model.
+     * Изменить номинацию к конкурсу
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -102,7 +102,7 @@ class NominationController extends Controller
     }
 
     /**
-     * Deletes an existing Nomination model.
+     * Удаление номинации к конкурсу
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed

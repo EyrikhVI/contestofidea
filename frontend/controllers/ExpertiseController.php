@@ -37,7 +37,7 @@ class ExpertiseController extends Controller
     }
 
     /**
-     * Lists all Expertise models.
+     * Список проведенных экспертиз
      * @return mixed
      */
     public function actionIndex()
@@ -52,7 +52,7 @@ class ExpertiseController extends Controller
     }
 
     /**
-     * Displays a single Expertise model.
+     * Просмотр эксрертизы
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -64,7 +64,7 @@ class ExpertiseController extends Controller
         ]);
     }
     /**
-     * Creates a new Expertise model.
+     * Провести экспертизу заявки
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -94,7 +94,7 @@ class ExpertiseController extends Controller
         return $this->render('create', ['expertises' => $expertises, 'application'=>$application,
             'competition'=>$competition, 'criterion'=>$criterion, 'user'=>$user]);
     }
-
+// Экспертиза по конкурсу
     public function actionCompetitionExpertise($id){
         $query=Expertise::find()->
         select('id_competition,id_application,id_user,id_nomination,SUM(rate) as total_rate')->

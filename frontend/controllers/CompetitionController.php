@@ -32,7 +32,7 @@ class CompetitionController extends AppController
         ];
     }
     /**
-     * Lists all Competition models.
+     * Вывод всех конкурсов. Для этого достаточно перевести пользователя в начало сайта
      * @return mixed
      */
     public function actionIndex()
@@ -47,6 +47,7 @@ class CompetitionController extends AppController
         return $this->goHome();
     }
 
+    //Просмотр конкурса
     public function actionView($id){
     $id=Yii::$app->request->get('id');
     $competition=Competition::findOne($id);
@@ -56,7 +57,7 @@ class CompetitionController extends AppController
     return $this->render('view',compact('competition','applications'));
     }
     /**
-     * Creates a new Competition model.
+     * Создание конкурса пользователем
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -77,7 +78,7 @@ class CompetitionController extends AppController
     }
 
     /**
-     * Updates an existing Competition model.
+     * Изменение конкурса организатором после создания
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -98,7 +99,7 @@ class CompetitionController extends AppController
     }
 
     /**
-     * Deletes an existing Competition model.
+     * Удаление конкурса
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed

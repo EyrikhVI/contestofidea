@@ -12,6 +12,7 @@ use yii\data\Pagination;
 
 class CategoryController extends AppController
 {
+    //Отображение конкурсов выбранной категории
     public function actionView($id){
     $id=YII::$app->request->get('id');
 //    $competitions=Competition::find()->where(['category_id'=>$id])->all();

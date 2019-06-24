@@ -34,7 +34,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Lists all Application models.
+     * Заявки текущего пользователя
      * @return mixed
      */
     public function actionIndex()
@@ -48,6 +48,7 @@ class ApplicationController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    //Заявки для оценки эксперту
     public function actionIndexExpert()
     {
 //        $searchModel = new ApplicationSearch();
@@ -81,7 +82,7 @@ class ApplicationController extends Controller
 
 
     /**
-     * Displays a single Application model.
+     * Просмотр заявки на конкурс
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -94,7 +95,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Creates a new Application model.
+     * Создание/подача заявки на конкурс
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -123,7 +124,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Updates an existing Application model.
+     * Изменить созданную заявку на конкурс
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -152,7 +153,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Deletes an existing Application model.
+     * Удалить заявку
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed

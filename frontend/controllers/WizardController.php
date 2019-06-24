@@ -12,7 +12,7 @@ use yii\base\Model;
 
 class WizardController extends \yii\web\Controller
 {
-
+//Настройка параметров конкурса через мастер
     public function actionIndex($id,$step)
     {
         $request = Yii::$app->request;
