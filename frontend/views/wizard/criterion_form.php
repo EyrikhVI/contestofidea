@@ -28,7 +28,7 @@ use kartik\range\RangeInput;
     ]); ?>
         </div>
         <div class="col-lg-6">
-    <?= $form->field($model_criterion, 'max_ratig')->widget(RangeInput::classname(), [
+    <?= $form->field($model_criterion, 'max_rating')->widget(RangeInput::classname(), [
         'options' => ['placeholder' => 'Rate (1 - 100)...'],
         'html5Container' => ['style' => 'width:350px'],
         'html5Options' => ['min' => 1, 'max' => 100],

@@ -26,7 +26,7 @@ class WizardController extends \yii\web\Controller
         $model_nomination = new Nomination();
         $model_criterion = new Criterion();
         $model_criterion->rate=100;
-        $model_criterion->max_ratig=5;
+        $model_criterion->max_rating=5;
         $model_expert = new Expert();
         if ($model_nomination->load($request->post())&& $model_nomination->save()) {
             $step++;
